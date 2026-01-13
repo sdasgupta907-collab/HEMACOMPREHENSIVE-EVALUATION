@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HEMA School - Holistic Report Mark Entry</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f5f7fa;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            padding: 25px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 3px solid #2574a9;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .school-logo {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px;
+        }
+
+        .header-title h1 {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+
+        .header-title p {
+            font-size: 13px;
+            opacity: 0.95;
+            font-weight: 400;
+        }
+
+        .session-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .content {
+            padding: 25px 30px;
+        }
+
+        .student-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: #f8f9fb;
+            border-radius: 10px;
+            border: 1px solid #e8ebed;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 500;
+            color: #2c3e50;
+            margin-bottom: 6px;
+            font-size: 13px;
+        }
+
+        .form-group input, .form-group select {
+            padding: 10px 12px;
+            border: 1px solid #dce1e6;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s;
+            background: white;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        .section-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            border-bottom: 2px solid #e8ebed;
+            padding-bottom: 2px;
+        }
+
+        .tab-btn {
+            padding: 10px 20px;
+            background: transparent;
+            border: none;
+            border-radius: 6px 6px 0 0;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+            font-size: 13px;
+            font-family: 'Poppins', sans-serif;
+            color: #5a6c7d;
+            position: relative;
+        }
+
+        .tab-btn:hover {
+            background: #f0f3f6;
+            color: #2c3e50;
+        }
+
+        .tab-btn.active {
+            background: white;
+            color: #3498db;
+            font-weight: 600;
+        }
+
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #3498db;
+        }
+
+        .section-content {
+            display: none;
+        }
+
+        .section-content.active {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .subject-card {
+            background: white;
+            border: 1px solid #e8ebed;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .subject-card h3 {
+            color: #2c3e50;
+            margin-bottom: 18px;
+            font-size: 16px;
+            font-weight: 600;
+            border-bottom: 2px solid #e8ebed;
+            padding-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .subject-card h3::before {
+            content: '';
+            width: 4px;
+            height: 20px;
+            background: #3498db;
+            border-radius: 2px;
+        }
+
+        .evaluation-grid {
+            display: grid;
+            grid-template-columns: 220px repeat(4, 1fr);
+            gap: 12px;
+            align-items: center;
+        }
+
+        .aspect-label {
+            font-weight: 500;
+            color: #34495e;
+            font-size: 13px;
+        }
+
+        .eval-input {
+            padding: 9px 10px;
+            border: 1px solid #dce1e6;
+            border-radius: 6px;
+            text-align: center;
+            transition: all 0.3s;
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            background: white;
+        }
+
+        .eval-input:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        .eval-header {
+            text-align: center;
+            font-weight: 600;
+            color: #3498db;
+            font-size: 12px;
+            padding: 8px;
+            background: #f0f8ff;
+            border-radius: 6px;
+        }
+
+        .attendance-section, .participation-section {
+            background: #f8f9fb;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #e8ebed;
+        }
+
+        .attendance-section h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .attendance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 2px solid #e8ebed;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 28px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-save {
+            background: #3498db;
+            color: white;
+            box-shadow: 0 2px 6px rgba(52, 152, 219, 0.3);
+        }
+
+        .btn-save:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.4);
+        }
+
+        .btn-clear {
+            background: #e74c3c;
+            color: white;
+            box-shadow: 0 2px 6px rgba(231, 76, 60, 0.3);
+        }
+
+        .btn-clear:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);
+        }
+
+        .btn-load {
+            background: #27ae60;
+            color: white;
+            box-shadow: 0 2px 6px rgba(39, 174, 96, 0.3);
+        }
+
+        .btn-load:hover {
+            background: #229954;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.4);
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 500;
+            display: none;
+            z-index: 1000;
+            animation: slideIn 0.3s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            font-size: 14px;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(400px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .notification.success {
+            background: #27ae60;
+        }
+
+        .notification.error {
+            background: #e74c3c;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #dce1e6;
+            border-radius: 6px;
+            font-family: 'Poppins', sans-serif;
+            resize: vertical;
+            min-height: 80px;
+            font-size: 13px;
+            background: white;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        .stats-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .stats-card h4 {
+            font-size: 14px;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+
+        .stats-card .value {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        @media (max-width: 768px) {
+            .evaluation-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .header-left {
+                flex-direction: column;
+            }
+        }
+
+        .breadcrumb {
+            padding: 15px 30px;
+            background: #f8f9fb;
+            border-bottom: 1px solid #e8ebed;
+            font-size: 13px;
+            color: #5a6c7d;
+        }
+
+        .breadcrumb span {
+            color: #3498db;
+            font-weight: 500;
+        }
+
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="notification" id="notification"></div>
+
+    <div class="container">
+        <div class="header">
+            <div class="header-left">
+                <div class="school-logo">
+                    <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 3L1 9L12 15L21 10.09V17H23V9M5 13.18V17.18L12 21L19 17.18V13.18L12 17L5 13.18Z" fill="#3498db"/>
+                    </svg>
+                </div>
+                <div class="header-title">
+                    <h1>HEMA HIGHER SECONDARY SCHOOL</h1>
+                    <p>Holistic Report - Mark Entry System</p>
+                </div>
+            </div>
+            <div class="session-badge">
+                Session: <span id="displaySession">2025-2026</span>
+            </div>
+        </div>
+
+        <div class="breadcrumb">
+            Dashboard / Students / <span>Holistic Report Mark Entry</span>
+        </div>
+
+        <div class="content">
+            <!-- Student Information -->
+            <div class="student-info">
+                <div class="form-group">
+                    <label>Admission No. *</label>
+                    <input type="text" id="admissionNo" required placeholder="Enter admission number">
+                </div>
+                <div class="form-group">
+                    <label>Roll No. *</label>
+                    <input type="text" id="rollNo" required placeholder="Enter roll number">
+                </div>
+                <div class="form-group">
+                    <label>Student Name *</label>
+                    <input type="text" id="studentName" required placeholder="Enter student name">
+                </div>
+                <div class="form-group">
+                    <label>Class & Section *</label>
+                    <input type="text" id="classSection" required placeholder="e.g., I-A">
+                </div>
+                <div class="form-group">
+                    <label>Session *</label>
+                    <input type="text" id="session" value="2025-26" required>
+                </div>
+                <div class="form-group">
+                    <label>Current Evaluation *</label>
+                    <select id="currentEval">
+                        <option value="1">Evaluation 1</option>
+                        <option value="2">Evaluation 2</option>
+                        <option value="3">Evaluation 3</option>
+                        <option value="4">Evaluation 4</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Section Tabs -->
+            <div class="section-tabs">
+                <button class="tab-btn active" onclick="showSection('languages')">Languages</button>
+                <button class="tab-btn" onclick="showSection('mathematics')">Mathematics</button>
+                <button class="tab-btn" onclick="showSection('evs')">Environmental Science</button>
+                <button class="tab-btn" onclick="showSection('computer')">Computer & AI</button>
+                <button class="tab-btn" onclick="showSection('exams')">Pen Paper Exams</button>
+                <button class="tab-btn" onclick="showSection('cocurricular')">Co-Curricular</button>
+                <button class="tab-btn" onclick="showSection('personality')">Personality</button>
+                <button class="tab-btn" onclick="showSection('attendance')">Attendance & Health</button>
+            </div>
+
+            <!-- Languages Section -->
+            <div id="languages" class="section-content active">
+                <div class="subject-card">
+                    <h3>ENGLISH</h3>
+                    <div class="evaluation-grid">
+                        <div></div>
+                        <div class="eval-header">Eval 1</div>
+                        <div class="eval-header">Eval 2</div>
+                        <div class="eval-header">Eval 3</div>
+                        <div class="eval-header">Eval 4</div>
+
+                        <div class="aspect-label">Reading - Pronunciation</div>
+                        <input type="text" class="eval-input" data-subject="english" data-aspect="reading-pronunciation" data-eval="1">
+                        <input type="text" class="eval-input" data-subject="english" data-aspect="reading-pronunciation" data-eval="2">
+                        <input type="text" class="eval-input" data-subject="english" data-aspect="reading-pronunciation" data-eval="3">
+                        <input type="text" class="eval-input" data-subject="english" data-aspect="reading-pronunciation" data-eval="4">
+
+                        <div class="aspect-label">Reading - Fluency</div>
+                        <input type="text" class="eval-input" data-subject="english" data-aspect="reading-fluency" data-eval="1">
+                        <input type="text" class="eval-input" data-subject="english" data-aspect="reading-fluency" data-eval="2">
+                        <input type="text" class="eval-input" data-subject="english" data-aspect="reading-fluency" data-eval="3">
+                        <input type="text" class="eval-input" data-subject="english" data-aspect="reading-fluency" data-eval="4">
+
+                        <div class="aspect-label">Reading - Comprehension</div>
+                        <input type="text" class="eval-input" data-subject="english" data-aspect="reading-comprehension" data-eval="1">
+                        <input type="text" class="eval-input" data-subject="english" data-aspect="reading-comprehension" data-eval="2">
+                        <input type="text" class="eval-input" data-subject="english" data-aspect="reading-comprehension" data-eval="3">
+                        <input type="text" class="eval-input" data-subject="english" data-aspect="reading-comprehension" data-eval="4">
+
+                        <div class="aspect-label">Writing - Creative Writing</div>
+                        <input type="text" class="eval-input" data-subject="english" data-aspect="writing-creative" data-eval="1">
+                        <input type="text" class="eval-input" data-subject="english" data-aspect="writing-creative" data-eval="2">
+                        <input type="text" class="eval-input" data-subject="english" data-aspect="writing-creative" data-eval="3">
+                        <input type="text" class="eval-input" data-subject="english" data-aspect="writing-creative" data-eval="4">
+
+                        <div class="aspect-label">Writing - Handwriting</div>
+                        <input type="text" class="eval-input" data-subject="english" data-aspect="writing-handwriting" data-eval="1">
+                        <input type="text" class="eval-input" data-subject="english" data-aspect="writing-handwriting" data-eval="2">
+                        <input type="text" class="eval-input" data-subject="english" data-aspect="writing-handwriting" data-eval="3">
+                        <input type="text" class="eval-input" data-subject="english" data-aspect="writing-handwriting" data-eval="4">
+
+                        <div class="aspect-label">Writing - Grammar</div>
+                        <input type="text" class="eval-input" data-subject="english" data-aspect="writing-grammar" data-eval="1">
+                        <input type="text" class="eval-input" data-subject="english" data-aspect="writing-grammar" data-eval="2">
+                        <input type="text" class="eval-input" data-subject="english" data-aspect="writing-grammar" data-eval="3">
+                        <input type="text" class="eval-input" data-subject="english" data-aspect="writing-grammar" data-eval="4">
+
+                        <div class="aspect-label">Writing - Spellings</div>
+                        <input type="text" class="eval-input" data-subject="english" data-aspect="writing-spellings" data-eval="1">
+                        <input type="text" class="eval-input" data-subject="english" data-aspect="writing-spellings" data-eval="2">
+                        <input type="text" class="eval-input" data-subject="english" data-aspect="writing-spellings" data-eval="3">
+                        <input type="text" class="eval-input" data-subject="english" data-aspect="writing-spellings" data-eval="4">
+
+                        <div class="aspect-label">Writing - Vocabulary</div>
+                        <input type="text" class="eval-input" data-subject="english" data-aspect="writing-vocabulary" data-eval="1">
+                        <input type="text" class="eval-input" data-subject="english" data-aspect="writing-vocabulary" data-eval="2">
+                        <input type="text" class="eval-input" data-subject="english" data-aspect="writing-vocabulary" data-eval="3">
+                        <input type="text" class="eval-input" data-subject="english" data-aspect="writing-vocabulary" data-eval="4">
+
+                        <div class="aspect-label">Speaking - Conversation</div>
+                        <input type="text" class="eval-input" data-subject="english" data-aspect="speaking-conversation" data-eval="1">
+                        <input type="text" class="eval-input" data-subject="english" data-aspect="speaking-conversation" data-eval="2">
+                        <input type="text" class="eval-input" data-subject="english" data-aspect="speaking-conversation" data-eval="3">
+                        <input type="text" class="eval-input" data-subject="english" data-aspect="speaking-conversation" data-eval="4">
+
+                        <div class="aspect-label">Speaking - Recitation</div>
+                        <input type="text" class="eval-input" data-subject="english" data-aspect="speaking-recitation" data-eval="1">
+                        <input type="text" class="eval-input" data-subject="english" data-aspect="speaking-recitation" data-eval="2">
+                        <input type="text" class="eval-input" data-subject="english" data-aspect="speaking-recitation" data-eval="3">
+                        <input type="text" class="eval-input" data-subject="english" data-aspect="speaking-recitation" data-eval="4">
+
+                        <div class="aspect-label">Listening - Comprehension</div>
+                        <input type="text" class="eval-input" data-subject="english" data-aspect="listening-comprehension" data-eval="1">
+                        <input type="text" class="eval-input" data-subject="english" data-aspect="listening-comprehension" data-eval="2">
+                        <input type="text" class="eval-input" data-subject="english" data-aspect="listening-comprehension" data-eval="3">
+                        <input type="text" class="eval-input" data-subject="english" data-aspect="listening-comprehension" data-eval="4">
+                    </div>
+                </div>
+
+                <div class="subject-card">
+                    <h3>HINDI</h3>
+                    <div class="evaluation-grid">
+                        <div></div>
+                        <div class="eval-header">Eval 1</div>
+                        <div class="eval-header">Eval 2</div>
+                        <div class="eval-header">Eval 3</div>
+                        <div class="eval-header">Eval 4</div>
+
+                        <div class="aspect-label">Reading - Pronunciation</div>
+                        <input type="text" class="eval-input" data-subject="hindi" data-aspect="reading-pronunciation" data-eval="1">
+                        <input type="text" class="eval-input" data-subject="hindi" data-aspect="reading-pronunciation" data-eval="2">
+                        <input type="text" class="eval-input" data-subject="hindi" data-aspect="reading-pronunciation" data-eval="3">
+                        <input type="text" class="eval-input" data-subject="hindi" data-aspect="reading-pronunciation" data-eval="4">
+
+                        <div class="aspect-label">Reading - Fluency</div>
+                        <input type="text" class="eval-input" data-subject="hindi" data-aspect="reading-fluency" data-eval="1">
+                        <input type="text" class="eval-input" data-subject="hindi" data-aspect="reading-fluency" data-eval="2">
+                        <input type="text" class="eval-input" data-subject="hindi" data-aspect="reading-fluency" data-eval="3">
+                        <input type="text" class="eval-input" data-subject="hindi" data-aspect="reading-fluency" data-eval="4">
+
+                        <div class="aspect-label">Reading - Comprehension</div>
+                        <input type="text" class="eval-input" data-subject="hindi" data-aspect="reading-comprehension" data-eval="1">
+                        <input type="text" class="eval-input" data-subject="hindi" data-aspect="reading-comprehension" data-eval="2">
+                        <input type="text" class="eval-input" data-subject="hindi" data-aspect="reading-comprehension" data-eval="3">
+                        <input type="text" class="eval-input" data-subject="hindi" data-aspect="reading-comprehension" data-eval="4">
+
+                        <div class="aspect-label">Writing - Creative Writing</div>
+                        <input type="text" class="eval-input" data-subject="hindi" data-aspect="writing-creative" data-eval="1">
+                        <input type="text" class="eval-input" data-subject="hindi" data-aspect="writing-creative" data-eval="2">
+                        <input type="text" class="eval-input" data-subject="hindi" data-aspect="writing-creative" data-eval="3">
+                        <input type="text" class="eval-input" data-subject="hindi" data-aspect="writing-creative" data-eval="4">
+
+                        <div class="aspect-label">Writing - Handwriting</div>
+                        <input type="text" class="eval-input" data-subject="hindi" data-aspect="writing-handwriting" data-eval="1">
+                        <input type="text" class="eval-input" data-subject="hindi" data-aspect="writing-handwriting" data-eval="2">
+                        <input type="text" class="eval-input" data-subject="hindi" data-aspect="writing-handwriting" data-eval="3">
+                        <input type="text" class="eval-input" data-subject="hindi" data-aspect="writing-handwriting" data-eval="4">
+
+                        <div class="aspect-label">Writing - Grammar</div>
+                        <input type="text" class="eval-input" data-subject="hindi" data-aspect="writing-grammar" data-eval="1">
+                        <input type="text" class="eval-input" data-subject="hindi" data-aspect="writing-grammar" data-eval="2">
+                        <input type="text" class="eval-input" data-subject="hindi" data-aspect="writing-grammar" data-eval="3">
+                        <input type="text" class="eval-input" data-subject="hindi" data-aspect="writing-grammar" data-eval="4">
+
+                        <div class="aspect-label">Writing - Spellings</div>
+                        <input type="text" class="eval-input" data-subject="hindi" data-aspect="writing-spellings" data-eval="1">
+                        <input type="text" class="eval-input" data-subject="hindi" data-aspect="writing-spellings" data-eval="2">
+                        <input type="text" class="eval-input" data-subject="hindi" data-aspect="writing-spellings" data-eval="3">
+                        <input type="text" class="eval-input" data-subject="hindi" data-aspect="writing-spellings" data-eval="4">
+
+                        <div class="aspect-label">Writing - Vocabulary</div>
+                        <input type="text" class="eval-input" data-subject="hindi" data-aspect="writing-vocabulary" data-eval="1">
+                        <input type="text" class="eval-input" data-subject="hindi" data-aspect="writing-vocabulary" data-eval="2">
+                        <input type="text" class="eval-input" data-subject="hindi" data-aspect="writing-vocabulary" data-eval="3">
+                        <input type="text" class="eval-input" data-subject="hindi" data-aspect="writing-vocabulary" data-eval="4">
+
+                        <div class="aspect-label">Speaking - Conversation</div>
+                        <input type="text" class="eval-input" data-subject="hindi" data-aspect="speaking-conversation" data-eval="1">
+                        <input type="text" class="eval-input" data-subject="hindi" data-aspect="speaking-conversation" data-eval="2">
+                        <input type="text" class="eval-input" data-subject="hindi" data-aspect="speaking-conversation" data-eval="3">
+                        <input type="text" class="eval-input" data-subject="hindi" data-aspect="speaking-conversation" data-eval="4">
+
+                        <div class="aspect-label">Speaking - Recitation</div>
+                        <input type="text" class="eval-input" data-subject="hindi" data-aspect="speaking-recitation" data-eval="1">
+                        <input type="text" class="eval-input" data-subject="hindi" data-aspect="speaking-recitation" data-eval="2">
+                        <input type="text" class="eval-input" data-subject="hindi" data-aspect="speaking-recitation" data-eval="3">
+                        <input type="text" class="eval-input" data-subject="hindi" data-aspect="speaking-recitation" data-eval="4">
+
+                        <div class="aspect-label">Listening - Comprehension</div>
+                        <input type="text" class="eval-input" data-subject="hindi" data-aspect="listening-comprehension" data-eval="1">
+                        <input type="text" class="eval-input" data-subject="hindi" data-aspect="listening-comprehension" data-eval="2">
+                        <input type="text" class="eval-input" data-subject="hindi" data-aspect="listening-comprehension" data-eval="3">
+                        <input type="text" class="eval-input" data-subject="hindi" data-aspect="listening-comprehension" data-eval="4">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mathematics Section -->
+            <div id="mathematics" class="section-content">
+                <div class="subject-card">
+                    <h3>MATHEMATICS</h3>
+                    <div class="evaluation-grid">
+                        <div></div>
+                        <div class="eval-header">Eval 1</div>
+                        <div class="eval-header">Eval 2</div>
+                        <div class="eval-header">Eval 3</div>
+                        <div class="eval-header">Eval 4</div>
+
+                        <div class="aspect-label">Concept</div>
+                        <input type="text" class="eval-input" data-subject="mathematics" data-aspect="concept" data-eval="1">
+                        <input type="text" class="eval-input" data-subject="mathematics" data-aspect="concept" data-eval="2">
+                        <input type="text" class="eval-input" data-subject="mathematics" data-aspect="concept" data-eval="3">
+                        <input type="text" class="eval-input" data-subject="mathematics" data-aspect="concept" data-eval="4">
+
+                        <div class="aspect-label">Activity</div>
+                        <input type="text" class="eval-input" data-subject="mathematics" data-aspect="activity" data-eval="1">
+                        <input type="text" class="eval-input" data-subject="mathematics" data-aspect="activity" data-eval="2">
+                        <input type="text" class="eval-input" data-subject="mathematics" data-aspect="activity" data-eval="3">
+                        <input type="text" class="eval-input" data-subject="mathematics" data-aspect="activity" data-eval="4">
+
+                        <div class="aspect-label">Tables</div>
+                        <input type="text" class="eval-input" data-subject="mathematics" data-aspect="tables" data-eval="1">
+                        <input type="text" class="eval-input" data-subject="mathematics" data-aspect="tables" data-eval="2">
+                        <input type="text" class="eval-input" data-subject="mathematics" data-aspect="tables" data-eval="3">
+                        <input type="text" class="eval-input" data-subject="mathematics" data-aspect="tables" data-eval="4">
+
+                        <div class="aspect-label">Mental Ability</div>
+                        <input type="text" class="eval-input" data-subject="mathematics" data-aspect="mental-ability" data-eval="1">
+                        <input type="text" class="eval-input" data-subject="mathematics" data-aspect="mental-ability" data-eval="2">
+                        <input type="text" class="eval-input" data-subject="mathematics" data-aspect="mental-ability" data-eval="3">
+                        <input type="text" class="eval-input" data-subject="mathematics" data-aspect="mental-ability" data-eval="4">
+                    </div>
+                </div>
+            </div>
+
+            <!-- EVS Section -->
+            <div id="evs" class="section-content">
+                <div class="subject-card">
+                    <h3>ENVIRONMENTAL SCIENCE</h3>
+                    <div class="evaluation-grid">
+                        <div></div>
+                        <div class="eval-header">Eval 1</div>
+                        <div class="eval-header">Eval 2</div>
+                        <div class="eval-header">Eval 3</div>
+                        <div class="eval-header">Eval 4</div>
+
+                        <div class="aspect-label">Environmental Sensitivity</div>
+                        <input type="text" class="eval-input" data-subject="evs" data-aspect="environmental-sensitivity" data-eval="1">
+                        <input type="text" class="eval-input" data-subject="evs" data-aspect="environmental-sensitivity" data-eval="2">
+                        <input type="text" class="eval-input" data-subject="evs" data-aspect="environmental-sensitivity" data-eval="3">
+                        <input type="text" class="eval-input" data-subject="evs" data-aspect="environmental-sensitivity" data-eval="4">
+
+                        <div class="aspect-label">Activity / Project</div>
+                        <input type="text" class="eval-input" data-subject="evs" data-aspect="activity-project" data-eval="1">
+                        <input type="text" class="eval-input" data-subject="evs" data-aspect="activity-project" data-eval="2">
+                        <input type="text" class="eval-input" data-subject="evs" data-aspect="activity-project" data-eval="3">
+                        <input type="text" class="eval-input" data-subject="evs" data-aspect="activity-project" data-eval="4">
+
+                        <div class="aspect-label">Group Discussion</div>
+                        <input type="text" class="eval-input" data-subject="evs" data-aspect="group-discussion" data-eval="1">
+                        <input type="text" class="eval-input" data-subject="evs" data-aspect="group-discussion" data-eval="2">
+                        <input type="text" class="eval-input" data-subject="evs" data-aspect="group-discussion" data-eval="3">
+                        <input type="text" class="eval-input" data-subject="evs" data-aspect="group-discussion" data-eval="4">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Computer & AI Section -->
+            <div id="computer" class="section-content">
+                <div class="subject-card">
+                    <h3>COMPUTER SCIENCE</h3>
+                    <div class="evaluation-grid">
+                        <div></div>
+                        <div class="eval-header">Eval 1</div>
+                        <div class="eval-header">Eval 2</div>
+                        <div class="eval-header">Eval 3</div>
+                        <div class="eval-header">Eval 4</div>
+
+                        <div class="aspect-label">Skills</div>
+                        <input type="text" class="eval-input" data-subject="computer" data-aspect="skills" data-eval="1">
+                        <input type="text" class="eval-input" data-subject="computer" data-aspect="skills" data-eval="2">
+                        <input type="text" class="eval-input" data-subject="computer" data-aspect="skills" data-eval="3">
+                        <input type="text" class="eval-input" data-subject="computer" data-aspect="skills" data-eval="4">
+
+                        <div class="aspect-label">Aptitude</div>
+                        <input type="text" class="eval-input" data-subject="computer" data-aspect="aptitude" data-eval="1">
+                        <input type="text" class="eval-input" data-subject="computer" data-aspect="aptitude" data-eval="2">
+                        <input type="text" class="eval-input" data-subject="computer" data-aspect="aptitude" data-eval="3">
+                        <input type="text" class="eval-input" data-subject="computer" data-aspect="aptitude" data-eval="4">
+                    </div>
+                </div>
+
+                <div class="subject-card">
+                    <h3>ARTIFICIAL INTELLIGENCE (AI)</h3>
+                    <div class="evaluation-grid">
+                        <div></div>
+                        <div class="eval-header">Eval 1</div>
+                        <div class="eval-header">Eval 2</div>
+                        <div class="eval-header">Eval 3</div>
+                        <div class="eval-header">Eval 4</div>
+
+                        <div class="aspect-label">Logical Thinking</div>
+                        <input type="text" class="eval-input" data-subject="ai" data-aspect="logical-thinking" data-eval="1">
+                        <input type="text" class="eval-input" data-subject="ai" data-aspect="logical-thinking" data-eval="2">
+                        <input type="text" class="eval-input" data-subject="ai" data-aspect="logical-thinking" data-eval="3">
+                        <input type="text" class="eval-input" data-subject="ai" data-aspect="logical-thinking" data-eval="4">
+
+                        <div class="aspect-label">Problem Solving</div>
+                        <input type="text" class="eval-input" data-subject="ai" data-aspect="problem-solving" data-eval="1">
+                        <input type="text" class="eval-input" data-subject="ai" data-aspect="problem-solving" data-eval="2">
+                        <input type="text" class="eval-input" data-subject="ai" data-aspect="problem-solving" data-eval="3">
+                        <input type="text" class="eval-input" data-subject="ai" data-aspect="problem-solving" data-eval="4">
+
+                        <div class="aspect-label">Project Work</div>
+                        <input type="text" class="eval-input" data-subject="ai" data-aspect="project-work" data-eval="1">
+                        <input type="text" class="eval-input" data-subject="ai" data-aspect="project-work" data-eval="2">
+                        <input type="text" class="eval-input" data-subject="ai" data-aspect="project-work" data-eval="3">
+                        <input type="text" class="eval-input" data-subject="ai" data-aspect="project-work" data-eval="4">
+                    </div>
+                </div>
+
+                <div class="subject-card">
+                    <h3>GENERAL KNOWLEDGE</h3>
+                    <div class="evaluation-grid">
+                        <div></div>
+                        <div class="eval-header">Eval 1</div>
+                        <div class="eval-header">Eval 2</div>
+                        <div class="eval-header">Eval 3</div>
+                        <div class="eval-header">Eval 4</div>
+
+                        <div class="aspect-label">Exam</div>
+                        <input type="text" class="eval-input" data-subject="gk" data-aspect="exam" data-eval="1">
+                        <input type="text" class="eval-input" data-subject="gk" data-aspect="exam" data-eval="2">
+                        <input type="text" class="eval-input" data-subject="gk" data-aspect="exam" data-eval="3">
+                        <input type="text" class="eval-input" data-subject="gk" data-aspect="exam" data-eval="4">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pen Paper Exams Section -->
+            <div id="exams" class="section-content">
+                <div class="subject-card">
+                    <h3>PEN PAPER EXAMINATION MARKS</h3>
+                    <div class="evaluation-grid">
+                        <div></div>
+                        <div class="eval-header">Eval 1</div>
+                        <div class="eval-header">Eval 2</div>
+                        <div class="eval-header">Eval 3</div>
+                        <div class="eval-header">Eval 4</div>
+
+                        <div class="aspect-label">ENGLISH</div>
+                        <input type="number" class="eval-input" data-subject="exam" data-aspect="english" data-eval="1">
+                        <input type="number" class="eval-input" data-subject="exam" data-aspect="english" data-eval="2">
+                        <input type="number" class="eval-input" data-subject="exam" data-aspect="english" data-eval="3">
+                        <input type="number" class="eval-input" data-subject="exam" data-aspect="english" data-eval="4">
+
+                        <div class="aspect-label">HINDI</div>
+                        <input type="number" class="eval-input" data-subject="exam" data-aspect="hindi" data-eval="1">
+                        <input type="number" class="eval-input" data-subject="exam" data-aspect="hindi" data-eval="2">
+                        <input type="number" class="eval-input" data-subject="exam" data-aspect="hindi" data-eval="3">
+                        <input type="number" class="eval-input" data-subject="exam" data-aspect="hindi" data-eval="4">
+
+                        <div class="aspect-label">MATHEMATICS</div>
+                        <input type="number" class="eval-input" data-subject="exam" data-aspect="mathematics" data-eval="1">
+                        <input type="number" class="eval-input" data-subject="exam" data-aspect="mathematics" data-eval="2">
+                        <input type="number" class="eval-input" data-subject="exam" data-aspect="mathematics" data-eval="3">
+                        <input type="number" class="eval-input" data-subject="exam" data-aspect="mathematics" data-eval="4">
+
+                        <div class="aspect-label">EVS</div>
+                        <input type="number" class="eval-input" data-subject="exam" data-aspect="evs" data-eval="1">
+                        <input type="number" class="eval-input" data-subject="exam" data-aspect="evs" data-eval="2">
+                        <input type="number" class="eval-input" data-subject="exam" data-aspect="evs" data-eval="3">
+                        <input type="number" class="eval-input" data-subject="exam" data-aspect="evs" data-eval="4">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Co-Curricular Section -->
+            <div id="cocurricular" class="section-content">
+                <div class="subject-card">
+                    <h3>GAMES</h3>
+                    <div class="evaluation-grid">
+                        <div></div>
+                        <div class="eval-header">Eval 1</div>
+                        <div class="eval-header">Eval 2</div>
+                        <div class="eval-header">Eval 3</div>
+                        <div class="eval-header">Eval 4</div>
+
+                        <div class="aspect-label">Enthusiasm</div>
+                        <input type="text" class="eval-input" data-subject="games" data-aspect="enthusiasm" data-eval="1">
+                        <input type="text" class="eval-input" data-subject="games" data-aspect="enthusiasm" data-eval="2">
+                        <input type="text" class="eval-input" data-subject="games" data-aspect="enthusiasm" data-eval="3">
+                        <input type="text" class="eval-input" data-subject="games" data-aspect="enthusiasm" data-eval="4">
+
+                        <div class="aspect-label">Discipline</div>
+                        <input type="text" class="eval-input" data-subject="games" data-aspect="discipline" data-eval="1">
+                        <input type="text" class="eval-input" data-subject="games" data-aspect="discipline" data-eval="2">
+                        <input type="text" class="eval-input" data-subject="games" data-aspect="discipline" data-eval="3">
+                        <input type="text" class="eval-input" data-subject="games" data-aspect="discipline" data-eval="4">
+
+                        <div class="aspect-label">Team Spirit</div>
+                        <input type="text" class="eval-input" data-subject="games" data-aspect="team-spirit" data-eval="1">
+                        <input type="text" class="eval-input" data-subject="games" data-aspect="team-spirit" data-eval="2">
+                        <input type="text" class="eval-input" data-subject="games" data-aspect="team-spirit" data-eval="3">
+                        <input type="text" class="eval-input" data-subject="games" data-aspect="team-spirit" data-eval="4">
+
+                        <div class="aspect-label">Talent</div>
+                        <input type="text" class="eval-input" data-subject="games" data-aspect="talent" data-eval="1">
+                        <input type="text" class="eval-input" data-subject="games" data-aspect="talent" data-eval="2">
+                        <input type="text" class="eval-input" data-subject="games" data-aspect="talent" data-eval="3">
+                        <input type="text" class="eval-input" data-subject="games" data-aspect="talent" data-eval="4">
+                    </div>
+                </div>
+
+                <div class="subject-card">
+                    <h3>ART / CRAFT</h3>
+                    <div class="evaluation-grid">
+                        <div></div>
+                        <div class="eval-header">Eval 1</div>
+                        <div class="eval-header">Eval 2</div>
+                        <div class="eval-header">Eval 3</div>
+                        <div class="eval-header">Eval 4</div>
+
+                        <div class="aspect-label">Interest</div>
+                        <input type="text" class="eval-input" data-subject="art" data-aspect="interest" data-eval="1">
+                        <input type="text" class="eval-input" data-subject="art" data-aspect="interest" data-eval="2">
+                        <input type="text" class="eval-input" data-subject="art" data-aspect="interest" data-eval="3">
+                        <input type="text" class="eval-input" data-subject="art" data-aspect="interest" data-eval="4">
+
+                        <div class="aspect-label">Creativity</div>
+                        <input type="text" class="eval-input" data-subject="art" data-aspect="creativity" data-eval="1">
+                        <input type="text" class="eval-input" data-subject="art" data-aspect="creativity" data-eval="2">
+                        <input type="text" class="eval-input" data-subject="art" data-aspect="creativity" data-eval="3">
+                        <input type="text" class="eval-input" data-subject="art" data-aspect="creativity" data-eval="4">
+
+                        <div class="aspect-label">Skill</div>
+                        <input type="text" class="eval-input" data-subject="art" data-aspect="skill" data-eval="1">
+                        <input type="text" class="eval-input" data-subject="art" data-aspect="skill" data-eval="2">
+                        <input type="text" class="eval-input" data-subject="art" data-aspect="skill" data-eval="3">
+                        <input type="text" class="eval-input" data-subject="art" data-aspect="skill" data-eval="4">
+                    </div>
+                </div>
+
+                <div class="subject-card">
+                    <h3>MUSIC / DANCE</h3>
+                    <div class="evaluation-grid">
+                        <div></div>
+                        <div class="eval-header">Eval 1</div>
+                        <div class="eval-header">Eval 2</div>
+                        <div class="eval-header">Eval 3</div>
+                        <div class="eval-header">Eval 4</div>
+
+                        <div class="aspect-label">Interest</div>
+                        <input type="text" class="eval-input" data-subject="music" data-aspect="interest" data-eval="1">
+                        <input type="text" class="eval-input" data-subject="music" data-aspect="interest" data-eval="2">
+                        <input type="text" class="eval-input" data-subject="music" data-aspect="interest" data-eval="3">
+                        <input type="text" class="eval-input" data-subject="music" data-aspect="interest" data-eval="4">
+
+                        <div class="aspect-label">Rhythm</div>
+                        <input type="text" class="eval-input" data-subject="music" data-aspect="rhythm" data-eval="1">
+                        <input type="text" class="eval-input" data-subject="music" data-aspect="rhythm" data-eval="2">
+                        <input type="text" class="eval-input" data-subject="music" data-aspect="rhythm" data-eval="3">
+                        <input type="text" class="eval-input" data-subject="music" data-aspect="rhythm" data-eval="4">
+
+                        <div class="aspect-label">Melody</div>
+                        <input type="text" class="eval-input" data-subject="music" data-aspect="melody" data-eval="1">
+                        <input type="text" class="eval-input" data-subject="music" data-aspect="melody" data-eval="2">
+                        <input type="text" class="eval-input" data-subject="music" data-aspect="melody" data-eval="3">
+                        <input type="text" class="eval-input" data-subject="music" data-aspect="melody" data-eval="4">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Personality Section -->
+            <div id="personality" class="section-content">
+                <div class="subject-card">
+                    <h3>PERSONALITY DEVELOPMENT - Personal & Social Traits</h3>
+                    <div class="evaluation-grid">
+                        <div></div>
+                        <div class="eval-header">Eval 1</div>
+                        <div class="eval-header">Eval 2</div>
+                        <div class="eval-header">Eval 3</div>
+                        <div class="eval-header">Eval 4</div>
+
+                        <div class="aspect-label">Courteousness</div>
+                        <input type="text" class="eval-input" data-subject="personality" data-aspect="courteousness" data-eval="1">
+                        <input type="text" class="eval-input" data-subject="personality" data-aspect="courteousness" data-eval="2">
+                        <input type="text" class="eval-input" data-subject="personality" data-aspect="courteousness" data-eval="3">
+                        <input type="text" class="eval-input" data-subject="personality" data-aspect="courteousness" data-eval="4">
+
+                        <div class="aspect-label">Confidence</div>
+                        <input type="text" class="eval-input" data-subject="personality" data-aspect="confidence" data-eval="1">
+                        <input type="text" class="eval-input" data-subject="personality" data-aspect="confidence" data-eval="2">
+                        <input type="text" class="eval-input" data-subject="personality" data-aspect="confidence" data-eval="3">
+                        <input type="text" class="eval-input" data-subject="personality" data-aspect="confidence" data-eval="4">
+
+                        <div class="aspect-label">Care of Belongings</div>
+                        <input type="text" class="eval-input" data-subject="personality" data-aspect="care-belongings" data-eval="1">
+                        <input type="text" class="eval-input" data-subject="personality" data-aspect="care-belongings" data-eval="2">
+                        <input type="text" class="eval-input" data-subject="personality" data-aspect="care-belongings" data-eval="3">
+                        <input type="text" class="eval-input" data-subject="personality" data-aspect="care-belongings" data-eval="4">
+
+                        <div class="aspect-label">Neatness</div>
+                        <input type="text" class="eval-input" data-subject="personality" data-aspect="neatness" data-eval="1">
+                        <input type="text" class="eval-input" data-subject="personality" data-aspect="neatness" data-eval="2">
+                        <input type="text" class="eval-input" data-subject="personality" data-aspect="neatness" data-eval="3">
+                        <input type="text" class="eval-input" data-subject="personality" data-aspect="neatness" data-eval="4">
+
+                        <div class="aspect-label">Regularity & Punctuality</div>
+                        <input type="text" class="eval-input" data-subject="personality" data-aspect="regularity-punctuality" data-eval="1">
+                        <input type="text" class="eval-input" data-subject="personality" data-aspect="regularity-punctuality" data-eval="2">
+                        <input type="text" class="eval-input" data-subject="personality" data-aspect="regularity-punctuality" data-eval="3">
+                        <input type="text" class="eval-input" data-subject="personality" data-aspect="regularity-punctuality" data-eval="4">
+
+                        <div class="aspect-label">Initiative</div>
+                        <input type="text" class="eval-input" data-subject="personality" data-aspect="initiative" data-eval="1">
+                        <input type="text" class="eval-input" data-subject="personality" data-aspect="initiative" data-eval="2">
+                        <input type="text" class="eval-input" data-subject="personality" data-aspect="initiative" data-eval="3">
+                        <input type="text" class="eval-input" data-subject="personality" data-aspect="initiative" data-eval="4">
+
+                        <div class="aspect-label">Spirit of Service</div>
+                        <input type="text" class="eval-input" data-subject="personality" data-aspect="spirit-service" data-eval="1">
+                        <input type="text" class="eval-input" data-subject="personality" data-aspect="spirit-service" data-eval="2">
+                        <input type="text" class="eval-input" data-subject="personality" data-aspect="spirit-service" data-eval="3">
+                        <input type="text" class="eval-input" data-subject="personality" data-aspect="spirit-service" data-eval="4">
+
+                        <div class="aspect-label">Respect for Others' Property</div>
+                        <input type="text" class="eval-input" data-subject="personality" data-aspect="respect-property" data-eval="1">
+                        <input type="text" class="eval-input" data-subject="personality" data-aspect="respect-property" data-eval="2">
+                        <input type="text" class="eval-input" data-subject="personality" data-aspect="respect-property" data-eval="3">
+                        <input type="text" class="eval-input" data-subject="personality" data-aspect="respect-property" data-eval="4">
+
+                        <div class="aspect-label">Self Control</div>
+                        <input type="text" class="eval-input" data-subject="personality" data-aspect="self-control" data-eval="1">
+                        <input type="text" class="eval-input" data-subject="personality" data-aspect="self-control" data-eval="2">
+                        <input type="text" class="eval-input" data-subject="personality" data-aspect="self-control" data-eval="3">
+                        <input type="text" class="eval-input" data-subject="personality" data-aspect="self-control" data-eval="4">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Attendance & Health Section -->
+            <div id="attendance" class="section-content">
+                <div class="subject-card">
+                    <h3>HEALTH STATUS</h3>
+                    <div class="attendance-grid">
+                        <div class="form-group">
+                            <label>Height (cms)</label>
+                            <input type="number" id="height" step="0.1" placeholder="e.g., 112">
+                        </div>
+                        <div class="form-group">
+                            <label>Weight (kg)</label>
+                            <input type="number" id="weight" step="0.1" placeholder="e.g., 20">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="attendance-section">
+                    <h3>EVALUATION 1 - Attendance & Participation</h3>
+                    <div class="attendance-grid">
+                        <div class="form-group">
+                            <label>Total Attendance</label>
+                            <input type="number" id="attendance1" placeholder="54">
+                        </div>
+                        <div class="form-group">
+                            <label>Total Working Days</label>
+                            <input type="number" id="workingDays1" placeholder="67">
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-top: 15px;">
+                        <label>Specific Participation</label>
+                        <textarea id="participation1" placeholder="Enter events participated in Evaluation 1"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>General Remarks</label>
+                        <input type="text" id="remarks1" placeholder="e.g., GOOD, AVERAGE, EXCELLENT">
+                    </div>
+                </div>
+
+                <div class="attendance-section">
+                    <h3>EVALUATION 2 - Attendance & Participation</h3>
+                    <div class="attendance-grid">
+                        <div class="form-group">
+                            <label>Total Attendance</label>
+                            <input type="number" id="attendance2">
+                        </div>
+                        <div class="form-group">
+                            <label>Total Working Days</label>
+                            <input type="number" id="workingDays2">
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-top: 15px;">
+                        <label>Specific Participation</label>
+                        <textarea id="participation2" placeholder="Enter events participated in Evaluation 2"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>General Remarks</label>
+                        <input type="text" id="remarks2">
+                    </div>
+                </div>
+
+                <div class="attendance-section">
+                    <h3>EVALUATION 3 - Attendance & Participation</h3>
+                    <div class="attendance-grid">
+                        <div class="form-group">
+                            <label>Total Attendance</label>
+                            <input type="number" id="attendance3">
+                        </div>
+                        <div class="form-group">
+                            <label>Total Working Days</label>
+                            <input type="number" id="workingDays3">
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-top: 15px;">
+                        <label>Specific Participation</label>
+                        <textarea id="participation3" placeholder="Enter events participated in Evaluation 3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>General Remarks</label>
+                        <input type="text" id="remarks3">
+                    </div>
+                </div>
+
+                <div class="attendance-section">
+                    <h3>EVALUATION 4 - Attendance & Participation</h3>
+                    <div class="attendance-grid">
+                        <div class="form-group">
+                            <label>Total Attendance</label>
+                            <input type="number" id="attendance4">
+                        </div>
+                        <div class="form-group">
+                            <label>Total Working Days</label>
+                            <input type="number" id="workingDays4">
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-top: 15px;">
+                        <label>Specific Participation</label>
+                        <textarea id="participation4" placeholder="Enter events participated in Evaluation 4"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>General Remarks</label>
+                        <input type="text" id="remarks4">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button class="btn btn-load" onclick="loadData()">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9 11L12 14L22 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M21 12V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Load Data
+                </button>
+                <button class="btn btn-save" onclick="saveData()">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H16L21 8V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M17 21V13H7V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M7 3V8H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Save Data
+                </button>
+                <button class="btn btn-clear" onclick="clearForm()">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3 6H5H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M8 6V4C8 3.46957 8.21071 2.96086 8.58579 2.58579C8.96086 2.21071 9.46957 2 10 2H14C14.5304 2 15.0391 2.21071 15.4142 2.58579C15.7893 2.96086 16 3.46957 16 4V6M19 6V20C19 20.5304 18.7893 21.0391 18.4142 21.4142C18.0391 21.7893 17.5304 22 17 22H7C6.46957 22 5.96086 21.7893 5.58579 21.4142C5.21071 21.0391 5 20.5304 5 20V6H19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Clear Form
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            document.querySelectorAll('.section-content').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function showNotification(message, type = 'success') {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = `notification ${type}`;
+            notification.style.display = 'block';
+
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
+        }
+
+        function saveData() {
+            const admissionNo = document.getElementById('admissionNo').value.trim();
+
+            if (!admissionNo) {
+                showNotification('Please enter Admission Number!', 'error');
+                return;
+            }
+
+            const data = {
+                studentInfo: {
+                    admissionNo: admissionNo,
+                    rollNo: document.getElementById('rollNo').value,
+                    studentName: document.getElementById('studentName').value,
+                    classSection: document.getElementById('classSection').value,
+                    session: document.getElementById('session').value,
+                    currentEval: document.getElementById('currentEval').value
+                },
+                marks: {},
+                health: {
+                    height: document.getElementById('height').value,
+                    weight: document.getElementById('weight').value
+                },
+                attendance: {}
+            };
+
+            document.querySelectorAll('.eval-input').forEach(input => {
+                const subject = input.dataset.subject;
+                const aspect = input.dataset.aspect;
+                const eval = input.dataset.eval;
+                const value = input.value;
+
+                if (!data.marks[subject]) {
+                    data.marks[subject] = {};
+                }
+                if (!data.marks[subject][aspect]) {
+                    data.marks[subject][aspect] = {};
+                }
+                data.marks[subject][aspect][eval] = value;
+            });
+
+            for (let i = 1; i <= 4; i++) {
+                data.attendance[`eval${i}`] = {
+                    attendance: document.getElementById(`attendance${i}`).value,
+                    workingDays: document.getElementById(`workingDays${i}`).value,
+                    participation: document.getElementById(`participation${i}`).value,
+                    remarks: document.getElementById(`remarks${i}`).value
+                };
+            }
+
+            localStorage.setItem(`holisticReport_${admissionNo}`, JSON.stringify(data));
+            showNotification('Data saved successfully!', 'success');
+        }
+
+        function loadData() {
+            const admissionNo = document.getElementById('admissionNo').value.trim();
+
+            if (!admissionNo) {
+                showNotification('Please enter Admission Number to load data!', 'error');
+                return;
+            }
+
+            const savedData = localStorage.getItem(`holisticReport_${admissionNo}`);
+
+            if (!savedData) {
+                showNotification('No data found for this Admission Number!', 'error');
+                return;
+            }
+
+            const data = JSON.parse(savedData);
+
+            document.getElementById('rollNo').value = data.studentInfo.rollNo || '';
+            document.getElementById('studentName').value = data.studentInfo.studentName || '';
+            document.getElementById('classSection').value = data.studentInfo.classSection || '';
+            document.getElementById('session').value = data.studentInfo.session || '';
+            document.getElementById('currentEval').value = data.studentInfo.currentEval || '1';
+
+            document.querySelectorAll('.eval-input').forEach(input => {
+                const subject = input.dataset.subject;
+                const aspect = input.dataset.aspect;
+                const eval = input.dataset.eval;
+
+                if (data.marks[subject] && data.marks[subject][aspect] && data.marks[subject][aspect][eval]) {
+                    input.value = data.marks[subject][aspect][eval];
+                }
+            });
+
+            document.getElementById('height').value = data.health.height || '';
+            document.getElementById('weight').value = data.health.weight || '';
+
+            for (let i = 1; i <= 4; i++) {
+                if (data.attendance[`eval${i}`]) {
+                    document.getElementById(`attendance${i}`).value = data.attendance[`eval${i}`].attendance || '';
+                    document.getElementById(`workingDays${i}`).value = data.attendance[`eval${i}`].workingDays || '';
+                    document.getElementById(`participation${i}`).value = data.attendance[`eval${i}`].participation || '';
+                    document.getElementById(`remarks${i}`).value = data.attendance[`eval${i}`].remarks || '';
+                }
+            }
+
+            showNotification('Data loaded successfully!', 'success');
+        }
+
+        function clearForm() {
+            if (confirm('Are you sure you want to clear all data? This action cannot be undone.')) {
+                document.querySelectorAll('input, textarea, select').forEach(field => {
+                    if (field.id !== 'session' && field.id !== 'currentEval') {
+                        field.value = '';
+                    }
+                });
+                showNotification('Form cleared!', 'success');
+            }
+        }
+
+        let autoSaveTimer;
+        document.addEventListener('input', () => {
+            clearTimeout(autoSaveTimer);
+            autoSaveTimer = setTimeout(() => {
+                const admissionNo = document.getElementById('admissionNo').value.trim();
+                if (admissionNo) {
+                    saveData();
+                }
+            }, 5000);
+        });
+    </script>
+</body>
+</html>
