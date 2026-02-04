@@ -744,36 +744,35 @@
         <div class="content">
             <!-- Student Information -->
             <div class="student-info">
-                <div class="form-group">
-                    <label>Admission No. *</label>
-                    <input type="text" id="admissionNo" required placeholder="Enter admission number">
-                </div>
-                <div class="form-group">
-                    <label>Roll No. *</label>
-                    <input type="text" id="rollNo" required placeholder="Enter roll number">
-                </div>
-                <div class="form-group">
-                    <label>Student Name *</label>
-                    <input type="text" id="studentName" required placeholder="Enter student name">
-                </div>
-                <div class="form-group">
-                    <label>Class & Section *</label>
-                    <input type="text" id="classSection" required placeholder="e.g., I-A">
-                </div>
-                <div class="form-group">
-                    <label>Session *</label>
-                    <input type="text" id="session" value="2025-26" required>
-                </div>
-                <div class="form-group">
-                    <label>Current Evaluation *</label>
-                    <select id="currentEval">
-                        <option value="1">Evaluation 1</option>
-                        <option value="2">Evaluation 2</option>
-                        <option value="3">Evaluation 3</option>
-                        <option value="4">Evaluation 4</option>
-                    </select>
-                </div>
-            </div>
+        <div class="form-group">
+            <label>Admission No. *</label>
+            <input type="text" id="admissionNo" placeholder="Enter admission number" required>
+        </div>
+        <div class="form-group">
+            <label>Roll No. *</label>
+            <input type="text" id="rollNo" placeholder="Enter roll number" required readonly>
+        </div>
+        <div class="form-group">
+            <label>Student Name *</label>
+            <input type="text" id="studentName" placeholder="Enter student name" required readonly>
+        </div>
+        <div class="form-group">
+            <label>Father's Name *</label>
+            <input type="text" id="fatherName" placeholder="Father's name" required readonly>
+        </div>
+        <div class="form-group">
+            <label>Mother's Name *</label>
+            <input type="text" id="motherName" placeholder="Mother's name" required readonly>
+        </div>
+        <div class="form-group">
+            <label>Class & Section *</label>
+            <input type="text" id="classSection" placeholder="e.g., I-A" required readonly>
+        </div>
+        <div class="form-group">
+            <label>Session *</label>
+            <input type="text" id="session" value="2025-26" required>
+        </div>
+    </div>
 
             <!-- Section Tabs -->
             <div class="section-tabs">
@@ -2322,6 +2321,1445 @@
     </div>
 
     <script>
+        // Student database
+        const studentsData = {
+  "12267": {
+    "name": "AADISHREE D. NAIR",
+    "class": "I",
+    "section": "A",
+    "rollNo": "1101",
+    "motherName": "ANITHA KUMARI K.C.",
+    "fatherName": "LATE DEEPU P. K."
+  },
+  "12001": {
+    "name": "AADVIK GOSWAMI",
+    "class": "I",
+    "section": "D",
+    "rollNo": "1401",
+    "motherName": "MADHU GURJAR",
+    "fatherName": "AMIT GIRI"
+  },
+  "1004569": {
+    "name": "AAHNIK KUSHWAHA",
+    "class": "I",
+    "section": "D",
+    "rollNo": "1402",
+    "motherName": "POOJA KUSHWAHA",
+    "fatherName": "ARUN KUMAR KUSHWAHA"
+  },
+  "12019": {
+    "name": "AARAV VISHWAKARMA",
+    "class": "I",
+    "section": "B",
+    "rollNo": "1201",
+    "motherName": "MEENA VISHWAKARMA",
+    "fatherName": "ASHISH VISHKARMA"
+  },
+  "11275": {
+    "name": "AARUSH MUKHERJEE",
+    "class": "I",
+    "section": "C",
+    "rollNo": "1301",
+    "motherName": "RINKI MUKHERJEE",
+    "fatherName": "SAMRAT MUKHERJEE"
+  },
+  "11274": {
+    "name": "AAYUSH TAYDE",
+    "class": "I",
+    "section": "C",
+    "rollNo": "1302",
+    "motherName": "SUJATA TAYDE",
+    "fatherName": "RAHUL TAYDE"
+  },
+  "11533": {
+    "name": "ABHISHEK",
+    "class": "I",
+    "section": "D",
+    "rollNo": "1403",
+    "motherName": "KAVITA DEVI",
+    "fatherName": "RAJENDER"
+  },
+  "11364": {
+    "name": "ABHYUDAY SONI",
+    "class": "I",
+    "section": "B",
+    "rollNo": "1202",
+    "motherName": "RENU SONI",
+    "fatherName": "ANURAG SONI"
+  },
+  "12009": {
+    "name": "ABIR GUPTA",
+    "class": "I",
+    "section": "C",
+    "rollNo": "1303",
+    "motherName": "GARIMA GUPTA",
+    "fatherName": "RAHUL GUPTA"
+  },
+  "1004445": {
+    "name": "ABU TALHA",
+    "class": "I",
+    "section": "B",
+    "rollNo": "1203",
+    "motherName": "TABASSUM KHAN",
+    "fatherName": "RIJVAN KHAN"
+  },
+  "12253": {
+    "name": "ADHVIK CHOURASE",
+    "class": "I",
+    "section": "E",
+    "rollNo": "1501",
+    "motherName": "MONIKA CHOURASE",
+    "fatherName": "DIPAK CHOURASE"
+  },
+  "12265": {
+    "name": "ADHYA VISHWAKARMA",
+    "class": "I",
+    "section": "C",
+    "rollNo": "1304",
+    "motherName": "VARSHA VISHWAKARMA",
+    "fatherName": "SANDEEP VISHWAKARMA"
+  },
+  "11491": {
+    "name": "ADITYA JHARKHANDE",
+    "class": "I",
+    "section": "A",
+    "rollNo": "1102",
+    "motherName": "POONAM JHARKHANDE",
+    "fatherName": "MUKESH JHARKHANDE"
+  },
+  "11053": {
+    "name": "ADVIK SAHU",
+    "class": "I",
+    "section": "C",
+    "rollNo": "1305",
+    "motherName": "NIDHI SAHU",
+    "fatherName": "LUCKY SAHU"
+  },
+  "11328": {
+    "name": "AKSHANSH KAROSIYA",
+    "class": "I",
+    "section": "A",
+    "rollNo": "1103",
+    "motherName": "SANDHYA KAROSIYA",
+    "fatherName": "NEERAJ KAROSIYA"
+  },
+  "11329": {
+    "name": "AKSHAT VISHWAKARMA",
+    "class": "I",
+    "section": "A",
+    "rollNo": "1104",
+    "motherName": "SARIKA VISHWAKARMA",
+    "fatherName": "NILESH VISHWAKARMA"
+  },
+  "12162": {
+    "name": "AMAYRAH SIDDIQUI",
+    "class": "I",
+    "section": "E",
+    "rollNo": "1502",
+    "motherName": "NAUSHEEN BANO",
+    "fatherName": "ABU SAQUIB SIDDIQUI"
+  },
+  "12286": {
+    "name": "ANANNYA SHUKLA",
+    "class": "I",
+    "section": "E",
+    "rollNo": "1503",
+    "motherName": "KRISHNA TIWARI",
+    "fatherName": "AVINASH SHUKLA"
+  },
+  "11657": {
+    "name": "ANANYA RAJE BUNDELA",
+    "class": "I",
+    "section": "D",
+    "rollNo": "1404",
+    "motherName": "KIRTI RAJA BUNDELA",
+    "fatherName": "GOLU RAJA BUNDELA"
+  },
+  "12255": {
+    "name": "ANAYA LOWANSHI",
+    "class": "I",
+    "section": "B",
+    "rollNo": "1204",
+    "motherName": "SHARMILA LOWANSHI",
+    "fatherName": "SUDHIR LOWANSHI"
+  },
+  "11992": {
+    "name": "ANSHIKA SHAKYA",
+    "class": "I",
+    "section": "D",
+    "rollNo": "1405",
+    "motherName": "ARTI SHAKYA",
+    "fatherName": "SUSHIL SHAKYA"
+  },
+  "1123/2324": {
+    "name": "ANVI ANAND",
+    "class": "I",
+    "section": "C",
+    "rollNo": "1306",
+    "motherName": "POOJA ANAND",
+    "fatherName": "ANAND AYYAKAN"
+  },
+  "12112": {
+    "name": "ANVIKSHA SAGAR",
+    "class": "I",
+    "section": "B",
+    "rollNo": "1205",
+    "motherName": "NEHA SAGAR",
+    "fatherName": "ARVIND SAGAR"
+  },
+  "12245": {
+    "name": "ARAV SHAKYA",
+    "class": "I",
+    "section": "D",
+    "rollNo": "1406",
+    "motherName": "PUSHPA",
+    "fatherName": "ATUL SHAKYA"
+  },
+  "11983": {
+    "name": "AROHI AGARWAL",
+    "class": "I",
+    "section": "C",
+    "rollNo": "1307",
+    "motherName": "CHITRA PAUL AGARWAL",
+    "fatherName": "ADITYA AGARWAL"
+  },
+  "12278": {
+    "name": "AROHI KUMARI",
+    "class": "I",
+    "section": "E",
+    "rollNo": "1504",
+    "motherName": "SUNITA DEVI",
+    "fatherName": "AJEET PATEL"
+  },
+  "12218": {
+    "name": "ARYAN JOGI",
+    "class": "I",
+    "section": "E",
+    "rollNo": "1505",
+    "motherName": "BHURI BAI",
+    "fatherName": "DURGA PRASAD JOGI"
+  },
+  "11272": {
+    "name": "ASHMITA DAS",
+    "class": "I",
+    "section": "C",
+    "rollNo": "1308",
+    "motherName": "RITA DAS",
+    "fatherName": "ASHISH KUMAR DAS"
+  },
+  "12094": {
+    "name": "ASHVIK RAGHUWANSHI",
+    "class": "I",
+    "section": "D",
+    "rollNo": "1407",
+    "motherName": "BINDIYA RAGHUWANSHI",
+    "fatherName": "PANKAJ RAGHUWANSHI"
+  },
+  "11288": {
+    "name": "ATHARV DHAKAD",
+    "class": "I",
+    "section": "D",
+    "rollNo": "1408",
+    "motherName": "RAGINI",
+    "fatherName": "UMESH KUMAR"
+  },
+  "11330": {
+    "name": "ATHARV TIWARI",
+    "class": "I",
+    "section": "B",
+    "rollNo": "1206",
+    "motherName": "SANGEETA TIWARI",
+    "fatherName": "SANJAY KUMAR TIWARI"
+  },
+  "11731": {
+    "name": "ATHARV VISHWAKARMA",
+    "class": "I",
+    "section": "A",
+    "rollNo": "1105",
+    "motherName": "JYOTI VISHWAKARMA",
+    "fatherName": "JITENDRA VISHWAKARMA"
+  },
+  "11282": {
+    "name": "AVANEESH TILOTIYA",
+    "class": "I",
+    "section": "C",
+    "rollNo": "1309",
+    "motherName": "PREETI TILOTIYA",
+    "fatherName": "VINOD TILOTIYA"
+  },
+  "12187": {
+    "name": "AVANI SINGH",
+    "class": "I",
+    "section": "E",
+    "rollNo": "1506",
+    "motherName": "PRIYA SINGH",
+    "fatherName": "DHARMENDRA SINGH"
+  },
+  "12307": {
+    "name": "AVYANSHI SRIVASTAVA",
+    "class": "I",
+    "section": "A",
+    "rollNo": "",
+    "motherName": "REKHA KUMARI",
+    "fatherName": "AJAY KUMAR VERMA"
+  },
+  "11196": {
+    "name": "AVYUKT MORE",
+    "class": "I",
+    "section": "A",
+    "rollNo": "1106",
+    "motherName": "HANSA MORE",
+    "fatherName": "SURVEER SINGH MORE"
+  },
+  "11671": {
+    "name": "AYANSH JAIN",
+    "class": "I",
+    "section": "C",
+    "rollNo": "1310",
+    "motherName": "RUPALI JAIN",
+    "fatherName": "ABHISHEK JAIN"
+  },
+  "12058": {
+    "name": "AYANSH JAIN",
+    "class": "I",
+    "section": "D",
+    "rollNo": "1409",
+    "motherName": "KRATIKA JAIN",
+    "fatherName": "ANUPAM JAIN"
+  },
+  "11551": {
+    "name": "AYANSHI TOMAR",
+    "class": "I",
+    "section": "D",
+    "rollNo": "1410",
+    "motherName": "ANITA TOMAR",
+    "fatherName": "BHUPENDRA TOMAR"
+  },
+  "12150": {
+    "name": "BHAKTI DHAKAD",
+    "class": "I",
+    "section": "D",
+    "rollNo": "1411",
+    "motherName": "KIRAN",
+    "fatherName": "SUPYAR SINGH DHAKAD"
+  },
+  "12085": {
+    "name": "BHAVIKA PAWAR",
+    "class": "I",
+    "section": "E",
+    "rollNo": "1507",
+    "motherName": "PRITI",
+    "fatherName": "RAJESH PAWAR"
+  },
+  "12145": {
+    "name": "BHAVISH YADAV",
+    "class": "I",
+    "section": "C",
+    "rollNo": "1311",
+    "motherName": "ANITA YADAV",
+    "fatherName": "JITENDRA YADAV"
+  },
+  "12125": {
+    "name": "BHAVYA YADAV",
+    "class": "I",
+    "section": "B",
+    "rollNo": "1207",
+    "motherName": "ARTI YADAV",
+    "fatherName": "DEENU YADAV"
+  },
+  "11601": {
+    "name": "BHAVYANSH KUSHWAHA",
+    "class": "I",
+    "section": "B",
+    "rollNo": "1208",
+    "motherName": "GIRJA KUSHWAHA",
+    "fatherName": "SACHIN KUSHWAHA"
+  },
+  "11947": {
+    "name": "BHAVYANSHU MANEKAR",
+    "class": "I",
+    "section": "C",
+    "rollNo": "1312",
+    "motherName": "PADMA MANEKAR",
+    "fatherName": "MANOJ KUMAR MANEKAR"
+  },
+  "11038": {
+    "name": "CHAITANYA MALVIYA",
+    "class": "I",
+    "section": "A",
+    "rollNo": "1107",
+    "motherName": "ASHA",
+    "fatherName": "CHANDRAKANT MALVIYA"
+  },
+  "11549": {
+    "name": "DAKSHITH KUMAR",
+    "class": "I",
+    "section": "A",
+    "rollNo": "1108",
+    "motherName": "JAYANTI NEHRU",
+    "fatherName": "VEL MURGAN"
+  },
+  "11425": {
+    "name": "DEEPTI SHEVRE",
+    "class": "I",
+    "section": "B",
+    "rollNo": "1209",
+    "motherName": "POONAM SHEVRE",
+    "fatherName": "SANDEEP SHEVRE"
+  },
+  "11753": {
+    "name": "DEVANSHI RATHORE",
+    "class": "I",
+    "section": "D",
+    "rollNo": "1412",
+    "motherName": "HEMA RATHORE",
+    "fatherName": "AKHILESH RATHORE"
+  },
+  "12054": {
+    "name": "DEVANSHI SAHU",
+    "class": "I",
+    "section": "D",
+    "rollNo": "1413",
+    "motherName": "RACHNA SAHU",
+    "fatherName": "DEVBAKS SAHU"
+  },
+  "11791": {
+    "name": "DHAIRYA SAXENA",
+    "class": "I",
+    "section": "D",
+    "rollNo": "1414",
+    "motherName": "VIBHA SAXENA",
+    "fatherName": "AMIT SAXENA"
+  },
+  "12080": {
+    "name": "DHRUV YADAV",
+    "class": "I",
+    "section": "E",
+    "rollNo": "1508",
+    "motherName": "GAYATRI YADAV",
+    "fatherName": "SATISH YADAV"
+  },
+  "12089": {
+    "name": "DHRUVI TOMAR",
+    "class": "I",
+    "section": "B",
+    "rollNo": "1210",
+    "motherName": "PREETI KUMARI",
+    "fatherName": "SRAJAN SINGH TOMAR"
+  },
+  "11807": {
+    "name": "DIVYANSH",
+    "class": "I",
+    "section": "B",
+    "rollNo": "1211",
+    "motherName": "SANGEETA",
+    "fatherName": "LALA PRASAD"
+  },
+  "11342": {
+    "name": "DIVYANSH BANSHAKAR",
+    "class": "I",
+    "section": "A",
+    "rollNo": "1109",
+    "motherName": "NEELU VERMA",
+    "fatherName": "VIJAY BANSHAKAR"
+  },
+  "12237": {
+    "name": "DIVYANSH MEENA",
+    "class": "I",
+    "section": "D",
+    "rollNo": "1415",
+    "motherName": "SUJITA MEENA",
+    "fatherName": "RAHUL MEENA"
+  },
+  "1121/2324": {
+    "name": "DIVYANSH NISHOD",
+    "class": "I",
+    "section": "E",
+    "rollNo": "1509",
+    "motherName": "CHHAMA NISHOD",
+    "fatherName": "SONU NISHOD"
+  },
+  "11481": {
+    "name": "DIVYANSH TEJI",
+    "class": "I",
+    "section": "B",
+    "rollNo": "1212",
+    "motherName": "MANISHA TEJI",
+    "fatherName": "AVINASH TEJI"
+  },
+  "12127": {
+    "name": "EKANSH KHATKE",
+    "class": "I",
+    "section": "D",
+    "rollNo": "1416",
+    "motherName": "VISHAKHA KHATKE",
+    "fatherName": "DEEPAK KHATKE"
+  },
+  "12152": {
+    "name": "GAURANSH PARDESHI",
+    "class": "I",
+    "section": "E",
+    "rollNo": "1510",
+    "motherName": "RESHU PARDESHI",
+    "fatherName": "LAVISH KUMAR PARDESHI"
+  },
+  "12182": {
+    "name": "GAURAV AHIRWAR",
+    "class": "I",
+    "section": "E",
+    "rollNo": "1511",
+    "motherName": "TANUJA AHIRWAR",
+    "fatherName": "BRAJESH AHIRWAR"
+  },
+  "1126/2324": {
+    "name": "GEET MAHAJAN",
+    "class": "I",
+    "section": "E",
+    "rollNo": "1512",
+    "motherName": "DEEPALI GOPAL MAHAJAN",
+    "fatherName": "GOPAL MAHAJAN"
+  },
+  "11326": {
+    "name": "GITANSHI BHUMARKAR",
+    "class": "I",
+    "section": "A",
+    "rollNo": "1110",
+    "motherName": "KANCHANA BHUMARKAR",
+    "fatherName": "KAMLESH BHUMARKAR"
+  },
+  "11712": {
+    "name": "HAROON ABBASI",
+    "class": "I",
+    "section": "C",
+    "rollNo": "1313",
+    "motherName": "ZEBA HASAN",
+    "fatherName": "SHAHAB UDDIN ABBASI"
+  },
+  "1120/2324": {
+    "name": "HARSH SHINDE",
+    "class": "I",
+    "section": "C",
+    "rollNo": "1314",
+    "motherName": "KAVITA SHINDE",
+    "fatherName": "SONU SHINDE"
+  },
+  "11394": {
+    "name": "HIMANI UMRE",
+    "class": "I",
+    "section": "C",
+    "rollNo": "1315",
+    "motherName": "VARSHA PRASAD",
+    "fatherName": "BADREE UMRE"
+  },
+  "12039": {
+    "name": "HIMANSH JAISWAL",
+    "class": "I",
+    "section": "C",
+    "rollNo": "1316",
+    "motherName": "SURABHI JAISWAL",
+    "fatherName": "MANISH JAISWAL"
+  },
+  "11498": {
+    "name": "HIMANSHU KUMAR",
+    "class": "I",
+    "section": "A",
+    "rollNo": "1111",
+    "motherName": "MAMTA DEVI",
+    "fatherName": "GAUTAM KUMAR"
+  },
+  "11977": {
+    "name": "HIMANSHU PAL",
+    "class": "I",
+    "section": "E",
+    "rollNo": "1513",
+    "motherName": "SANGEETA PAL",
+    "fatherName": "DHANNU PAL"
+  },
+  "12060": {
+    "name": "HITANSHI ROHANKAR",
+    "class": "I",
+    "section": "D",
+    "rollNo": "1417",
+    "motherName": "DEEPIKA ROHANKAR",
+    "fatherName": "DILIP ROHANKAR"
+  },
+  "11539": {
+    "name": "HIYA DAS",
+    "class": "I",
+    "section": "A",
+    "rollNo": "1112",
+    "motherName": "PURABI DEKA DAS",
+    "fatherName": "RUBUL DAS"
+  },
+  "11718": {
+    "name": "INAYA KHAN",
+    "class": "I",
+    "section": "C",
+    "rollNo": "1317",
+    "motherName": "YASMEEN KHAN",
+    "fatherName": "SAMSHUL KHAN"
+  },
+  "11123": {
+    "name": "ISAAC",
+    "class": "I",
+    "section": "D",
+    "rollNo": "1418",
+    "motherName": "PUNITA",
+    "fatherName": "KALLI PIRAMAL"
+  },
+  "12214": {
+    "name": "ISHANVI SAHU",
+    "class": "I",
+    "section": "A",
+    "rollNo": "1113",
+    "motherName": "SUDHA SAHU",
+    "fatherName": "SURESH SAHU"
+  },
+  "11339": {
+    "name": "JANHAVI SARATHE",
+    "class": "I",
+    "section": "A",
+    "rollNo": "1114",
+    "motherName": "PURNAWATI SARATHE",
+    "fatherName": "GAJENDRA SARATHE"
+  },
+  "12151": {
+    "name": "JANHAVI SOLANKI",
+    "class": "I",
+    "section": "B",
+    "rollNo": "1213",
+    "motherName": "SHEETAL SOLANKI",
+    "fatherName": "MAHESH KUMAR SOLANKI"
+  },
+  "12010": {
+    "name": "JATIN CHOURASIYA",
+    "class": "I",
+    "section": "D",
+    "rollNo": "1419",
+    "motherName": "SWETA CHOURASIYA",
+    "fatherName": "RAKESH CHOURASIYA"
+  },
+  "1004554": {
+    "name": "JAYDEV CHANDRAVANSHI",
+    "class": "I",
+    "section": "A",
+    "rollNo": "1115",
+    "motherName": "SUSHMA CHANDRAVANSHI",
+    "fatherName": "RAJESH CHANDRAVANSHI"
+  },
+  "11314": {
+    "name": "JAYESH SAHANI",
+    "class": "I",
+    "section": "B",
+    "rollNo": "1214",
+    "motherName": "POONAM SAHANI",
+    "fatherName": "MANOHAR SAHANI"
+  },
+  "11991": {
+    "name": "KABIR SARATHE",
+    "class": "I",
+    "section": "A",
+    "rollNo": "1116",
+    "motherName": "INDU SARATHE",
+    "fatherName": "SHRIKANT SARATHE"
+  },
+  "12295": {
+    "name": "KAMAKSHI LODHI",
+    "class": "I",
+    "section": "E",
+    "rollNo": "1514",
+    "motherName": "RACHNA LODHI",
+    "fatherName": "RAKESH LODHI"
+  },
+  "11774": {
+    "name": "KANAK CHOUHAN",
+    "class": "I",
+    "section": "B",
+    "rollNo": "1215",
+    "motherName": "JYOTI CHOUHAN",
+    "fatherName": "RAJENDRA SINGH CHOUHAN"
+  },
+  "12011": {
+    "name": "KANISH THAPA",
+    "class": "I",
+    "section": "E",
+    "rollNo": "1515",
+    "motherName": "DEEPA THAPA",
+    "fatherName": "TARA BAHADUR THAPA"
+  },
+  "12281": {
+    "name": "KANISHKA SURYAVANSHI",
+    "class": "I",
+    "section": "E",
+    "rollNo": "1516",
+    "motherName": "DIPALI SURYAVANSHI",
+    "fatherName": "MANOJ SURYAVANSHI"
+  },
+  "11569": {
+    "name": "KARTIK GOSWAMI",
+    "class": "I",
+    "section": "A",
+    "rollNo": "1117",
+    "motherName": "KAVITA GIRI",
+    "fatherName": "YOGESH KUMAR GOSWAMI"
+  },
+  "12129": {
+    "name": "KARTIK PARIHAR",
+    "class": "I",
+    "section": "A",
+    "rollNo": "1118",
+    "motherName": "RENU SINGH",
+    "fatherName": "BHARAT SINGH"
+  },
+  "11400": {
+    "name": "KAVYA",
+    "class": "I",
+    "section": "D",
+    "rollNo": "1420",
+    "motherName": "RENUKA",
+    "fatherName": "VENUGOPAL SWAMY"
+  },
+  "12119": {
+    "name": "KAVYA AHIRWAR",
+    "class": "I",
+    "section": "B",
+    "rollNo": "1216",
+    "motherName": "SARASWATI AHIRWAR",
+    "fatherName": "GYANI PRASAD AHIRWAR"
+  },
+  "12213": {
+    "name": "KHANAK VERMA",
+    "class": "I",
+    "section": "E",
+    "rollNo": "1517",
+    "motherName": "MANISHA LODHI",
+    "fatherName": "DHARMENDRA VERMA"
+  },
+  "12098": {
+    "name": "KRISHNA MEENA",
+    "class": "I",
+    "section": "D",
+    "rollNo": "1421",
+    "motherName": "RANJITA MEENA",
+    "fatherName": "ROHIT MEENA"
+  },
+  "12290": {
+    "name": "KRISHNAVI",
+    "class": "I",
+    "section": "E",
+    "rollNo": "1518",
+    "motherName": "NEHA",
+    "fatherName": "PRADEEP SHRIOMPRAKASH SAXENA"
+  },
+  "12072": {
+    "name": "LAKSHITA WARUDE",
+    "class": "I",
+    "section": "A",
+    "rollNo": "1119",
+    "motherName": "VAISHALI WARUDE",
+    "fatherName": "SANJAY WARUDE"
+  },
+  "12175": {
+    "name": "LAVIN SHAKYA",
+    "class": "I",
+    "section": "E",
+    "rollNo": "1519",
+    "motherName": "LALITA SHAKYA",
+    "fatherName": "NARENDRA SHAKYA"
+  },
+  "12287": {
+    "name": "MAHI YADAV",
+    "class": "I",
+    "section": "E",
+    "rollNo": "1520",
+    "motherName": "ANJU YADAV",
+    "fatherName": "AJAY YADAV"
+  },
+  "1004562": {
+    "name": "MANAL KHAN",
+    "class": "I",
+    "section": "B",
+    "rollNo": "1217",
+    "motherName": "NAZNEEN KHAN",
+    "fatherName": "RAFIQ UDDIN KHAN"
+  },
+  "12087": {
+    "name": "MANNAT RAIKWAR",
+    "class": "I",
+    "section": "C",
+    "rollNo": "1318",
+    "motherName": "SANGEETA RAIKWAR",
+    "fatherName": "RAJENDRA RAIKWAR"
+  },
+  "11980": {
+    "name": "MANSHA PATIL",
+    "class": "I",
+    "section": "B",
+    "rollNo": "1218",
+    "motherName": "POOJA PATIL",
+    "fatherName": "BALA PATIL"
+  },
+  "12121": {
+    "name": "MANYA HADA",
+    "class": "I",
+    "section": "C",
+    "rollNo": "1319",
+    "motherName": "SEEMA HADA",
+    "fatherName": "PADAM SINGH HADA"
+  },
+  "1124/2324": {
+    "name": "MITALI JADHAV",
+    "class": "I",
+    "section": "B",
+    "rollNo": "1219",
+    "motherName": "VAISHALI JADHAV",
+    "fatherName": "VINOD JADHAV"
+  },
+  "12164": {
+    "name": "MOHAMMAD UZAIR",
+    "class": "I",
+    "section": "E",
+    "rollNo": "1521",
+    "motherName": "ZEBA NAZ",
+    "fatherName": "MOHD ARIF"
+  },
+  "1122/2324": {
+    "name": "MOHIT KUMAR",
+    "class": "I",
+    "section": "D",
+    "rollNo": "1422",
+    "motherName": "RAJNI",
+    "fatherName": "MANOJ KUMAR"
+  },
+  "12304": {
+    "name": "MOKSHIT LODHI",
+    "class": "I",
+    "section": "B",
+    "rollNo": "1235",
+    "motherName": "POOJA RAJPUT",
+    "fatherName": "NEERAJ LODHI"
+  },
+  "12147": {
+    "name": "MULYANK CHAURASIA",
+    "class": "I",
+    "section": "D",
+    "rollNo": "1423",
+    "motherName": "RACHNA CHAURASIA",
+    "fatherName": "GAURISHANKAR CHAURASIA"
+  },
+  "12102": {
+    "name": "MUSA DANISH",
+    "class": "I",
+    "section": "C",
+    "rollNo": "1320",
+    "motherName": "NOSHEEN DANISH",
+    "fatherName": "ABDUL DANISH"
+  },
+  "12038": {
+    "name": "NAMAN JAIN",
+    "class": "I",
+    "section": "C",
+    "rollNo": "1321",
+    "motherName": "ANJU JAIN",
+    "fatherName": "RAHUL JAIN"
+  },
+  "11967": {
+    "name": "NIHIT MANSARE",
+    "class": "I",
+    "section": "B",
+    "rollNo": "1220",
+    "motherName": "SUNITA MANSARE",
+    "fatherName": "PRAVIN MANSARE"
+  },
+  "12003": {
+    "name": "NITYA VERMA",
+    "class": "I",
+    "section": "E",
+    "rollNo": "1522",
+    "motherName": "POOJA VERMA",
+    "fatherName": "RAJEEV VERMA"
+  },
+  "1125/2324": {
+    "name": "OM BHARAT KOLI",
+    "class": "I",
+    "section": "A",
+    "rollNo": "1120",
+    "motherName": "SUSHMA KOLI",
+    "fatherName": "BHARAT KOLI"
+  },
+  "11051": {
+    "name": "ONI SHARMA",
+    "class": "I",
+    "section": "B",
+    "rollNo": "1221",
+    "motherName": "NIMMI SHARMA",
+    "fatherName": "ANIL SHARMA"
+  },
+  "12293": {
+    "name": "PARTH KAITHAL",
+    "class": "I",
+    "section": "A",
+    "rollNo": "1121",
+    "motherName": "MAMTA KAITHAL",
+    "fatherName": "DHARMENDRA KUMAR KAITHAL"
+  },
+  "12208": {
+    "name": "PARTH NAGPHASE",
+    "class": "I",
+    "section": "E",
+    "rollNo": "1523",
+    "motherName": "PREMLATA NAGPHASE",
+    "fatherName": "DHEERAJ KUMAR NAGPHASE"
+  },
+  "12298": {
+    "name": "PARTH PRAJAPATI",
+    "class": "I",
+    "section": "E",
+    "rollNo": "1524",
+    "motherName": "NIRAMALA PRAJAPATI",
+    "fatherName": "RAJENDRA PRAJAPATI"
+  },
+  "11993": {
+    "name": "PIHU GAWHADE",
+    "class": "I",
+    "section": "B",
+    "rollNo": "1222",
+    "motherName": "SHESHADRI GAWHADE",
+    "fatherName": "MANISH GAWHADE"
+  },
+  "12090": {
+    "name": "POORVI DUBEY",
+    "class": "I",
+    "section": "C",
+    "rollNo": "1322",
+    "motherName": "VINITA DUBEY",
+    "fatherName": "SANDEEP KUMAR DUBEY"
+  },
+  "11431": {
+    "name": "PRANAV GUPTA",
+    "class": "I",
+    "section": "B",
+    "rollNo": "1223",
+    "motherName": "POONAM GUPTA",
+    "fatherName": "UJAGIR LAL GUPTA"
+  },
+  "1127/2324": {
+    "name": "PRIYANKA HARODE",
+    "class": "I",
+    "section": "A",
+    "rollNo": "1122",
+    "motherName": "POOJA HARODE",
+    "fatherName": "YOGESH HARODE"
+  },
+  "11345": {
+    "name": "PRIYANSH GIRI GOSWAMI",
+    "class": "I",
+    "section": "B",
+    "rollNo": "1224",
+    "motherName": "PREETI",
+    "fatherName": "SHYAM GIR GOSWAMI"
+  },
+  "11056": {
+    "name": "PRIYANSHI MALVIYA",
+    "class": "I",
+    "section": "B",
+    "rollNo": "1225",
+    "motherName": "JYOTI MLAVIYA",
+    "fatherName": "SUNIL MALVIYA"
+  },
+  "12097": {
+    "name": "PUSHPRAJ SINGH TOMAR",
+    "class": "I",
+    "section": "D",
+    "rollNo": "1424",
+    "motherName": "KRISHNA TOMAR",
+    "fatherName": "VIJAY SINGH TOMAR"
+  },
+  "11215": {
+    "name": "R. RAKSHIT",
+    "class": "I",
+    "section": "C",
+    "rollNo": "1323",
+    "motherName": "R.POOJA",
+    "fatherName": "T.RAMESH"
+  },
+  "12186": {
+    "name": "RAKSHIT PRAJAPATI",
+    "class": "I",
+    "section": "E",
+    "rollNo": "1525",
+    "motherName": "RINKU PRAJAPATI",
+    "fatherName": "MUKESH PRAJAPATI"
+  },
+  "1119/2324": {
+    "name": "RAMESHWAR",
+    "class": "I",
+    "section": "B",
+    "rollNo": "1226",
+    "motherName": "PADMA",
+    "fatherName": "A SHIVA"
+  },
+  "12226": {
+    "name": "RAYAN KHAN",
+    "class": "I",
+    "section": "E",
+    "rollNo": "1526",
+    "motherName": "HINA KAUSAR",
+    "fatherName": "JAVED KHAN"
+  },
+  "1118/2324": {
+    "name": "REHMA BANO",
+    "class": "I",
+    "section": "D",
+    "rollNo": "1425",
+    "motherName": "BEEMUKEEM KHA",
+    "fatherName": "MUKEEM KHA"
+  },
+  "12168": {
+    "name": "REYANSH SONI",
+    "class": "I",
+    "section": "D",
+    "rollNo": "1426",
+    "motherName": "PREETI SONI",
+    "fatherName": "RAJESH SONI"
+  },
+  "12302": {
+    "name": "RISHIKA HEDAU",
+    "class": "I",
+    "section": "C",
+    "rollNo": "1324",
+    "motherName": "ASHA HEDAU",
+    "fatherName": "MANOHAR HEDAU"
+  },
+  "11997": {
+    "name": "RIYANSH THAKUR",
+    "class": "I",
+    "section": "A",
+    "rollNo": "1123",
+    "motherName": "RANI THAKUR",
+    "fatherName": "SANTOSH THAKUR"
+  },
+  "11909": {
+    "name": "RIZAAN AKHTAR",
+    "class": "I",
+    "section": "B",
+    "rollNo": "1227",
+    "motherName": "RITU AKHTAR",
+    "fatherName": "JUNED AKHTAR"
+  },
+  "11960": {
+    "name": "RUDRANSH DESHMUKH",
+    "class": "I",
+    "section": "A",
+    "rollNo": "1124",
+    "motherName": "NAMRATA DESHMUKH",
+    "fatherName": "NARENDRA DESHMUKH"
+  },
+  "11946": {
+    "name": "RUDRANSH VISHWAKARMA",
+    "class": "I",
+    "section": "D",
+    "rollNo": "1427",
+    "motherName": "SWATI SHARMA",
+    "fatherName": "ANKUR VISHWAKARMA"
+  },
+  "11617": {
+    "name": "SAANVI PATEL",
+    "class": "I",
+    "section": "B",
+    "rollNo": "1228",
+    "motherName": "AMBIKA PATEL",
+    "fatherName": "NITESH KUMAR PATEL"
+  },
+  "11463": {
+    "name": "SABARI VASAN",
+    "class": "I",
+    "section": "A",
+    "rollNo": "1125",
+    "motherName": "R.MALLIKA",
+    "fatherName": "M.RAMKRISHNA"
+  },
+  "12020": {
+    "name": "SAMARTH PANSE",
+    "class": "I",
+    "section": "A",
+    "rollNo": "1126",
+    "motherName": "RAVINA PANSE",
+    "fatherName": "VIJAY PANSE"
+  },
+  "12088": {
+    "name": "SAMIKSHA JOGI",
+    "class": "I",
+    "section": "A",
+    "rollNo": "1127",
+    "motherName": "SHWETA JOGI",
+    "fatherName": "MAHENDRA KUMAR JOGI"
+  },
+  "12084": {
+    "name": "SAMRAT G.C.",
+    "class": "I",
+    "section": "C",
+    "rollNo": "1325",
+    "motherName": "PUSHPA G.C.",
+    "fatherName": "MANOJ G.C."
+  },
+  "12021": {
+    "name": "SAMRUDHI PANSE",
+    "class": "I",
+    "section": "A",
+    "rollNo": "1128",
+    "motherName": "RAVINA PANSE",
+    "fatherName": "VIJAY PANSE"
+  },
+  "12249": {
+    "name": "SANVI BAGHEL",
+    "class": "I",
+    "section": "A",
+    "rollNo": "1129",
+    "motherName": "AARTI BAGHEL",
+    "fatherName": "SHIVRAJ SINGH"
+  },
+  "12063": {
+    "name": "SARTHAK SINGH RAJPUT",
+    "class": "I",
+    "section": "E",
+    "rollNo": "1527",
+    "motherName": "DURGA RAJPUT",
+    "fatherName": "NARAYAN SINGH"
+  },
+  "11954": {
+    "name": "SARVANI DAS",
+    "class": "I",
+    "section": "E",
+    "rollNo": "1528",
+    "motherName": "SMRITEE DAS",
+    "fatherName": "BHASKAR DAS"
+  },
+  "12297": {
+    "name": "SEHAJ SINGH",
+    "class": "I",
+    "section": "E",
+    "rollNo": "1529",
+    "motherName": "JASBEER KAUR",
+    "fatherName": "MALKEET SINGH"
+  },
+  "12158": {
+    "name": "SHAANVI GUPTA",
+    "class": "I",
+    "section": "E",
+    "rollNo": "1530",
+    "motherName": "JAGRATI GUPTA",
+    "fatherName": "HEERALAL GUPTA"
+  },
+  "11821": {
+    "name": "SHAKKU KHAN",
+    "class": "I",
+    "section": "C",
+    "rollNo": "1326",
+    "motherName": "RICHA SHRIVASTAVA",
+    "fatherName": "MUMTAZ KHAN"
+  },
+  "11783": {
+    "name": "SHIV TIWARI",
+    "class": "I",
+    "section": "C",
+    "rollNo": "1327",
+    "motherName": "SEEMA TIWARI",
+    "fatherName": "VINAY KUMAR TIWARI"
+  },
+  "11825": {
+    "name": "SHIVAAY DEBNATH",
+    "class": "I",
+    "section": "A",
+    "rollNo": "1130",
+    "motherName": "SHILPA DEBNATH",
+    "fatherName": "SHANTANU DEBNATH"
+  },
+  "12291": {
+    "name": "SHIVAM GUPTA",
+    "class": "I",
+    "section": "E",
+    "rollNo": "1531",
+    "motherName": "GUDIYA",
+    "fatherName": "DHANANJAY GUPTA"
+  },
+  "12107": {
+    "name": "SHIVANSH RATHOR",
+    "class": "I",
+    "section": "E",
+    "rollNo": "1532",
+    "motherName": "DIPTI RATHORE",
+    "fatherName": "KAMLESH RATHORE"
+  },
+  "12179": {
+    "name": "SHIVANSH SINGH AHIRWAR",
+    "class": "I",
+    "section": "B",
+    "rollNo": "1229",
+    "motherName": "DEEPALI AHIRWAR",
+    "fatherName": "DILEEP KUMAR AHIRWAR"
+  },
+  "12193": {
+    "name": "SHIVYANSH MALVIYA",
+    "class": "I",
+    "section": "E",
+    "rollNo": "1533",
+    "motherName": "SHIVANI MALVIYA",
+    "fatherName": "MONU MALVIYA"
+  },
+  "11965": {
+    "name": "SHRADDHA",
+    "class": "I",
+    "section": "A",
+    "rollNo": "1131",
+    "motherName": "GOVINDHAMMAL",
+    "fatherName": "SHAKTIVEL"
+  },
+  "12146": {
+    "name": "SHRADDHA YADAV",
+    "class": "I",
+    "section": "C",
+    "rollNo": "1328",
+    "motherName": "ANITA YADAV",
+    "fatherName": "JITENDRA YADAV"
+  },
+  "12141": {
+    "name": "SHREYASH VERMA",
+    "class": "I",
+    "section": "C",
+    "rollNo": "1329",
+    "motherName": "PRIYANKA VERMA",
+    "fatherName": "ANKIT VERMA"
+  },
+  "12041": {
+    "name": "SHRUTI AGRAWAL",
+    "class": "I",
+    "section": "B",
+    "rollNo": "1230",
+    "motherName": "ROSHNI AGRAWAL",
+    "fatherName": "SARVESH AGARWAL"
+  },
+  "12027": {
+    "name": "SIYA RANE",
+    "class": "I",
+    "section": "D",
+    "rollNo": "1428",
+    "motherName": "POOJA RANE",
+    "fatherName": "GANGADHAR RANE"
+  },
+  "11976": {
+    "name": "SPARSH VISHWAKARMA",
+    "class": "I",
+    "section": "D",
+    "rollNo": "1429",
+    "motherName": "MEENA VISHWAKARMA",
+    "fatherName": "VIJAY KUMAR VISHWAKARMA"
+  },
+  "11975": {
+    "name": "SRIANKVI VERMA",
+    "class": "I",
+    "section": "C",
+    "rollNo": "1330",
+    "motherName": "SRIJANA VERMA",
+    "fatherName": "ANKIT VERMA"
+  },
+  "11945": {
+    "name": "SYED ABSAAR ALI",
+    "class": "I",
+    "section": "D",
+    "rollNo": "1430",
+    "motherName": "NAILA AAMIR",
+    "fatherName": "SYED AAMIR ALI"
+  },
+  "12059": {
+    "name": "TAKSHVI NAGVANSHI",
+    "class": "I",
+    "section": "D",
+    "rollNo": "1431",
+    "motherName": "LATA BRAMHWANSHI",
+    "fatherName": "MANISH NAGVANSHI"
+  },
+  "1004469": {
+    "name": "TEJASV RAJPUT",
+    "class": "I",
+    "section": "B",
+    "rollNo": "1231",
+    "motherName": "PREETI RAJPUT",
+    "fatherName": "SHAILENDRA RAJPUT"
+  },
+  "11407": {
+    "name": "TRISHA PRAJAPATI",
+    "class": "I",
+    "section": "A",
+    "rollNo": "1132",
+    "motherName": "GAYATRI PRAJAPATI",
+    "fatherName": "SATISH PRAJAPATI"
+  },
+  "11281": {
+    "name": "UKTIKA TRIPATHI",
+    "class": "I",
+    "section": "D",
+    "rollNo": "1432",
+    "motherName": "POOJA TRIPATHI",
+    "fatherName": "SHYAM SUNDAR TRIPATHI"
+  },
+  "11473": {
+    "name": "UNNATI YADAV",
+    "class": "I",
+    "section": "C",
+    "rollNo": "1331",
+    "motherName": "RUCHI YADAV",
+    "fatherName": "AVINASH SINGH YADAV"
+  },
+  "11948": {
+    "name": "UTSAV PATEL",
+    "class": "I",
+    "section": "B",
+    "rollNo": "1232",
+    "motherName": "SHWETA PATEL",
+    "fatherName": "RAJEEV SHANKAR PATEL"
+  },
+  "1004575": {
+    "name": "VEDANSH",
+    "class": "I",
+    "section": "B",
+    "rollNo": "1233",
+    "motherName": "POONAM KUMARI",
+    "fatherName": "BRAJESH KUMAR YADAV"
+  },
+  "11450": {
+    "name": "VEDANSH BAGDI",
+    "class": "I",
+    "section": "A",
+    "rollNo": "1133",
+    "motherName": "NEHA BAGDI",
+    "fatherName": "PANKAJ BAGDI"
+  },
+  "12077": {
+    "name": "VEDANT SINGH RAJPUT",
+    "class": "I",
+    "section": "B",
+    "rollNo": "1234",
+    "motherName": "JYOTI RAJPUT",
+    "fatherName": "PIYUSH SINGH RAJPUT"
+  },
+  "11690": {
+    "name": "VESHNAVI PURI GOSWAMI",
+    "class": "I",
+    "section": "C",
+    "rollNo": "1332",
+    "motherName": "SAPNA",
+    "fatherName": "YASPAL"
+  },
+  "12067": {
+    "name": "VIDHI SHARMA",
+    "class": "I",
+    "section": "E",
+    "rollNo": "1534",
+    "motherName": "NISHA SHARMA",
+    "fatherName": "ABHISHEK SHARMA"
+  },
+  "11154": {
+    "name": "VINAYAK SINGH BHADORIYA",
+    "class": "I",
+    "section": "D",
+    "rollNo": "1433",
+    "motherName": "NEETU SINGH BHADORIYA",
+    "fatherName": "RAKESH SINGH BHADORIYA"
+  },
+  "11490": {
+    "name": "VISHAL SINGH",
+    "class": "I",
+    "section": "D",
+    "rollNo": "1434",
+    "motherName": "ANJU",
+    "fatherName": "KULDEEP"
+  },
+  "11283": {
+    "name": "VISHESH CHANDERIYA",
+    "class": "I",
+    "section": "D",
+    "rollNo": "1435",
+    "motherName": "SAPNA CHANDERIYA",
+    "fatherName": "GAJENDRA CHANDERIYA"
+  },
+  "11114": {
+    "name": "VIVAAN PAL",
+    "class": "I",
+    "section": "C",
+    "rollNo": "1333",
+    "motherName": "MAYA PAL",
+    "fatherName": "SATISH PAL"
+  },
+  "12042": {
+    "name": "WAQAR ASHRAF",
+    "class": "I",
+    "section": "C",
+    "rollNo": "1334",
+    "motherName": "ROKHSANA KHATOON",
+    "fatherName": "MOHD ABID HUSSAIN"
+  },
+  "11363": {
+    "name": "YAMINI KADOLE",
+    "class": "I",
+    "section": "A",
+    "rollNo": "1134",
+    "motherName": "RAJANTI KADOLE",
+    "fatherName": "GOVIND KADOLE"
+  },
+  "11297": {
+    "name": "YASHIKA VERMA",
+    "class": "I",
+    "section": "A",
+    "rollNo": "1135",
+    "motherName": "ARCHNA VARMA",
+    "fatherName": "GOVIND PRASAD VERMA"
+  },
+  "11681": {
+    "name": "YUVRAJ PANDEY",
+    "class": "I",
+    "section": "A",
+    "rollNo": "1136",
+    "motherName": "AARTI TIWARI",
+    "fatherName": "VIJIT KUMAR PANDEY"
+  },
+  "11352": {
+    "name": "ZAINAB NAQVI",
+    "class": "I",
+    "section": "D",
+    "rollNo": "1436",
+    "motherName": "SHABEE FATMA",
+    "fatherName": "FARHAN NAQVI"
+  }
+};
+
+        // Auto-fill student details when admission number is entered
+        document.addEventListener('DOMContentLoaded', function() {
+            const admissionNoInput = document.getElementById('admissionNo');
+
+            admissionNoInput.addEventListener('blur', function() {
+                const admNo = this.value.trim();
+                if (admNo && studentsData[admNo]) {
+                    const student = studentsData[admNo];
+                    document.getElementById('studentName').value = student.name;
+                    document.getElementById('rollNo').value = student.rollNo;
+                    document.getElementById('fatherName').value = student.fatherName;
+                    document.getElementById('motherName').value = student.motherName;
+                    document.getElementById('classSection').value = student.class + '-' + student.section;
+                    showNotification('Student details loaded successfully!');
+                } else if (admNo) {
+                    showNotification('Admission number not found!', 'error');
+                    document.getElementById('studentName').value = '';
+                    document.getElementById('rollNo').value = '';
+                    document.getElementById('fatherName').value = '';
+                    document.getElementById('motherName').value = '';
+                    document.getElementById('classSection').value = '';
+                }
+            });
+        });
+
+        // Keep existing functions
+
         function showSection(sectionId) {
             document.querySelectorAll('.section-content').forEach(section => {
                 section.classList.remove('active');
@@ -2478,6 +3916,7 @@
             });
         }
 
+    
     </script>
 </body>
 </html>
