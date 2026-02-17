@@ -234,11 +234,11 @@
                 <h3 style="margin-bottom: 15px; color: #2c3e50;">Health Information</h3>
                 <div class="form-group">
                     <label for="height">Height (cm):</label>
-                    <input type="number" id="height" placeholder="Height in cm" step="0.1">
+                    <input type="number" id="height" placeholder="Height in cm" step="0.1" max="250">
                 </div>
                 <div class="form-group">
                     <label for="weight">Weight (kg):</label>
-                    <input type="number" id="weight" placeholder="Weight in kg" step="0.1">
+                    <input type="number" id="weight" placeholder="Weight in kg" step="0.1" max="150">
                 </div>
             </div>
 
@@ -1343,28 +1343,28 @@
                         <div class="eval-header">Eval 4</div>
 
                         <div class="aspect-label">ENGLISH</div>
-                        <input type="number" class="eval-input" data-subject="exam" data-aspect="english" data-eval="1">
-                        <input type="number" class="eval-input" data-subject="exam" data-aspect="english" data-eval="2">
-                        <input type="number" class="eval-input" data-subject="exam" data-aspect="english" data-eval="3">
-                        <input type="number" class="eval-input" data-subject="exam" data-aspect="english" data-eval="4">
+                        <input type="number" class="eval-input" data-subject="exam" data-aspect="english" data-eval="1" max="100">
+                        <input type="number" class="eval-input" data-subject="exam" data-aspect="english" data-eval="2" max="100">
+                        <input type="number" class="eval-input" data-subject="exam" data-aspect="english" data-eval="3" max="100">
+                        <input type="number" class="eval-input" data-subject="exam" data-aspect="english" data-eval="4" max="100">
 
                         <div class="aspect-label">HINDI</div>
-                        <input type="number" class="eval-input" data-subject="exam" data-aspect="hindi" data-eval="1">
-                        <input type="number" class="eval-input" data-subject="exam" data-aspect="hindi" data-eval="2">
-                        <input type="number" class="eval-input" data-subject="exam" data-aspect="hindi" data-eval="3">
-                        <input type="number" class="eval-input" data-subject="exam" data-aspect="hindi" data-eval="4">
+                        <input type="number" class="eval-input" data-subject="exam" data-aspect="hindi" data-eval="1" max="100">
+                        <input type="number" class="eval-input" data-subject="exam" data-aspect="hindi" data-eval="2" max="100">
+                        <input type="number" class="eval-input" data-subject="exam" data-aspect="hindi" data-eval="3" max="100">
+                        <input type="number" class="eval-input" data-subject="exam" data-aspect="hindi" data-eval="4" max="100">
 
                         <div class="aspect-label">MATHEMATICS</div>
-                        <input type="number" class="eval-input" data-subject="exam" data-aspect="mathematics" data-eval="1">
-                        <input type="number" class="eval-input" data-subject="exam" data-aspect="mathematics" data-eval="2">
-                        <input type="number" class="eval-input" data-subject="exam" data-aspect="mathematics" data-eval="3">
-                        <input type="number" class="eval-input" data-subject="exam" data-aspect="mathematics" data-eval="4">
+                        <input type="number" class="eval-input" data-subject="exam" data-aspect="mathematics" data-eval="1" max="100">
+                        <input type="number" class="eval-input" data-subject="exam" data-aspect="mathematics" data-eval="2" max="100">
+                        <input type="number" class="eval-input" data-subject="exam" data-aspect="mathematics" data-eval="3" max="100">
+                        <input type="number" class="eval-input" data-subject="exam" data-aspect="mathematics" data-eval="4" max="100">
 
                         <div class="aspect-label">EVS</div>
-                        <input type="number" class="eval-input" data-subject="exam" data-aspect="evs" data-eval="1">
-                        <input type="number" class="eval-input" data-subject="exam" data-aspect="evs" data-eval="2">
-                        <input type="number" class="eval-input" data-subject="exam" data-aspect="evs" data-eval="3">
-                        <input type="number" class="eval-input" data-subject="exam" data-aspect="evs" data-eval="4">
+                        <input type="number" class="eval-input" data-subject="exam" data-aspect="evs" data-eval="1" max="100">
+                        <input type="number" class="eval-input" data-subject="exam" data-aspect="evs" data-eval="2" max="100">
+                        <input type="number" class="eval-input" data-subject="exam" data-aspect="evs" data-eval="3" max="100">
+                        <input type="number" class="eval-input" data-subject="exam" data-aspect="evs" data-eval="4" max="100">
                     </div>
                 </div>
             </div>
@@ -1494,11 +1494,11 @@
                     <div class="attendance-grid">
                         <div class="form-group">
                             <label>Height (cms)</label>
-                            <input type="number" id="height" step="0.1" placeholder="e.g., 112">
+                            <input type="number" id="height_term2" step="0.1" placeholder="e.g., 112" max="250">
                         </div>
                         <div class="form-group">
                             <label>Weight (kg)</label>
-                            <input type="number" id="weight" step="0.1" placeholder="e.g., 20">
+                            <input type="number" id="weight_term2" step="0.1" placeholder="e.g., 20" max="150">
                         </div>
                     </div>
                 </div>
@@ -1508,11 +1508,11 @@
                     <div class="attendance-grid">
                         <div class="form-group">
                             <label>Total Attendance</label>
-                            <input type="number" id="attendance1" placeholder="54">
+                            <input type="number" id="attendance1" placeholder="54" max="100">
                         </div>
                         <div class="form-group">
                             <label>Total Working Days</label>
-                            <input type="number" id="workingDays1" placeholder="67">
+                            <input type="number" id="workingDays1" placeholder="67" max="100">
                         </div>
                     </div>
                     <div class="form-group" style="margin-top: 15px;">
@@ -1572,11 +1572,11 @@
                     <div class="attendance-grid">
                         <div class="form-group">
                             <label>Total Attendance</label>
-                            <input type="number" id="attendance2">
+                            <input type="number" id="attendance2" max="100">
                         </div>
                         <div class="form-group">
                             <label>Total Working Days</label>
-                            <input type="number" id="workingDays2">
+                            <input type="number" id="workingDays2" max="100">
                         </div>
                     </div>
                     <div class="form-group" style="margin-top: 15px;">
@@ -1636,11 +1636,11 @@
                     <div class="attendance-grid">
                         <div class="form-group">
                             <label>Total Attendance</label>
-                            <input type="number" id="attendance3">
+                            <input type="number" id="attendance3" max="100">
                         </div>
                         <div class="form-group">
                             <label>Total Working Days</label>
-                            <input type="number" id="workingDays3">
+                            <input type="number" id="workingDays3" max="100">
                         </div>
                     </div>
                     <div class="form-group" style="margin-top: 15px;">
@@ -1700,11 +1700,11 @@
                     <div class="attendance-grid">
                         <div class="form-group">
                             <label>Total Attendance</label>
-                            <input type="number" id="attendance4">
+                            <input type="number" id="attendance4" max="100">
                         </div>
                         <div class="form-group">
                             <label>Total Working Days</label>
-                            <input type="number" id="workingDays4">
+                            <input type="number" id="workingDays4" max="100">
                         </div>
                     </div>
                     <div class="form-group" style="margin-top: 15px;">
@@ -1772,15 +1772,15 @@
                     <h3>Evaluation 1</h3>
                     <div class="form-group">
                         <label for="attendance1">Attendance (%):</label>
-                        <input type="number" id="attendance1" min="0" max="100" placeholder="Attendance %">
+                        <input type="number" id="attendance1_term2" min="0" max="100" placeholder="Attendance %">
                     </div>
                     <div class="form-group">
                         <label for="workingDays1">Working Days:</label>
-                        <input type="number" id="workingDays1" min="0" placeholder="Total days">
+                        <input type="number" id="workingDays1_term2" min="0" placeholder="Total days" max="100">
                     </div>
                     <div class="form-group">
                         <label for="participation1">Participation:</label>
-                        <select id="participation1">
+                        <select id="participation1_term2">
                             <option value="">Select</option>
                             <option value="A">A</option>
                             <option value="B">B</option>
@@ -1789,7 +1789,7 @@
                     </div>
                     <div class="form-group">
                         <label for="remarks1">Remarks:</label>
-                        <textarea id="remarks1" rows="2"></textarea>
+                        <textarea id="remarks1_term2" rows="2"></textarea>
                     </div>
                 </div>
 
@@ -1797,15 +1797,15 @@
                     <h3>Evaluation 2</h3>
                     <div class="form-group">
                         <label for="attendance2">Attendance (%):</label>
-                        <input type="number" id="attendance2" min="0" max="100">
+                        <input type="number" id="attendance2_term2" min="0" max="100">
                     </div>
                     <div class="form-group">
                         <label for="workingDays2">Working Days:</label>
-                        <input type="number" id="workingDays2" min="0">
+                        <input type="number" id="workingDays2_term2" min="0" max="100">
                     </div>
                     <div class="form-group">
                         <label for="participation2">Participation:</label>
-                        <select id="participation2">
+                        <select id="participation2_term2">
                             <option value="">Select</option>
                             <option value="A">A</option>
                             <option value="B">B</option>
@@ -1814,7 +1814,7 @@
                     </div>
                     <div class="form-group">
                         <label for="remarks2">Remarks:</label>
-                        <textarea id="remarks2" rows="2"></textarea>
+                        <textarea id="remarks2_term2" rows="2"></textarea>
                     </div>
                 </div>
 
@@ -1822,15 +1822,15 @@
                     <h3>Evaluation 3</h3>
                     <div class="form-group">
                         <label for="attendance3">Attendance (%):</label>
-                        <input type="number" id="attendance3" min="0" max="100">
+                        <input type="number" id="attendance3_term2" min="0" max="100">
                     </div>
                     <div class="form-group">
                         <label for="workingDays3">Working Days:</label>
-                        <input type="number" id="workingDays3" min="0">
+                        <input type="number" id="workingDays3_term2" min="0" max="100">
                     </div>
                     <div class="form-group">
                         <label for="participation3">Participation:</label>
-                        <select id="participation3">
+                        <select id="participation3_term2">
                             <option value="">Select</option>
                             <option value="A">A</option>
                             <option value="B">B</option>
@@ -1839,7 +1839,7 @@
                     </div>
                     <div class="form-group">
                         <label for="remarks3">Remarks:</label>
-                        <textarea id="remarks3" rows="2"></textarea>
+                        <textarea id="remarks3_term2" rows="2"></textarea>
                     </div>
                 </div>
 
@@ -1847,15 +1847,15 @@
                     <h3>Evaluation 4</h3>
                     <div class="form-group">
                         <label for="attendance4">Attendance (%):</label>
-                        <input type="number" id="attendance4" min="0" max="100">
+                        <input type="number" id="attendance4_term2" min="0" max="100">
                     </div>
                     <div class="form-group">
                         <label for="workingDays4">Working Days:</label>
-                        <input type="number" id="workingDays4" min="0">
+                        <input type="number" id="workingDays4_term2" min="0" max="100">
                     </div>
                     <div class="form-group">
                         <label for="participation4">Participation:</label>
-                        <select id="participation4">
+                        <select id="participation4_term2">
                             <option value="">Select</option>
                             <option value="A">A</option>
                             <option value="B">B</option>
@@ -1864,7 +1864,7 @@
                     </div>
                     <div class="form-group">
                         <label for="remarks4">Remarks:</label>
-                        <textarea id="remarks4" rows="2"></textarea>
+                        <textarea id="remarks4_term2" rows="2"></textarea>
                     </div>
                 </div>
             </div>
@@ -5085,7 +5085,6 @@
             .header-left {
                 flex-direction: column;
             }
-        }
 
         .breadcrumb {
             padding: 15px 30px;
@@ -5128,7 +5127,6 @@
             .aspect-label {
                 font-size: 12px;
             }
-        }
 
         /* Mobile Devices - Portrait and Landscape */
         @media (max-width: 768px) {
@@ -5324,7 +5322,6 @@
             .stats-card .value {
                 font-size: 20px;
             }
-        }
 
         /* Small Mobile Devices */
         @media (max-width: 480px) {
@@ -5357,7 +5354,6 @@
             .content {
                 padding: 10px 8px;
             }
-        }
 
         /* Landscape Mode Optimization */
         @media (max-width: 896px) and (orientation: landscape) {
@@ -5373,7 +5369,6 @@
                 grid-template-columns: 150px repeat(4, 1fr);
                 font-size: 11px;
             }
-        }
 
         /* Touch-friendly enhancements */
         @media (hover: none) and (pointer: coarse) {
@@ -5390,7 +5385,6 @@
             .tab-btn {
                 min-height: 40px;
             }
-        }
 
         /* Enhanced Print Styles */
         @media print {
@@ -5429,7 +5423,6 @@
             @page {
                 margin: 0.5in;
             }
-        }
 
     </style>
 
@@ -5872,7 +5865,7 @@
 
     <script>
         function showPage(page) {
-            console.log('Switching to page:', page);
+            // console.log('Switching to page:', page);
 
             // Hide all pages
             const entryPage = document.getElementById('entryPage');
@@ -5892,7 +5885,7 @@
             if (targetPage) {
                 targetPage.classList.add('active');
                 targetPage.style.display = 'block';
-                console.log('✓ Page activated:', page + 'Page');
+                // console.log('✓ Page activated:', page + 'Page');
             } else {
                 console.error('✗ Page not found:', page + 'Page');
                 return;
@@ -5903,15 +5896,15 @@
             const targetBtn = document.getElementById(page + 'Btn');
             if (targetBtn) {
                 targetBtn.classList.add('active');
-                console.log('✓ Button activated:', page + 'Btn');
+                // console.log('✓ Button activated:', page + 'Btn');
             }
 
             // Load dashboard data if needed
             if (page === 'dashboard') {
-                console.log('Loading dashboard data...');
+                // console.log('Loading dashboard data...');
                 try {
                     loadDashboardData();
-                    console.log('✓ Dashboard data loaded');
+                    // console.log('✓ Dashboard data loaded');
                 } catch (error) {
                     console.error('✗ Error loading dashboard:', error);
                 }
