@@ -1,8 +1,1 @@
 {
-  "name": "hema-backend",
-  "version": "1.0.0",
-  "type": "module",
-  "dependencies": {
-    "@vercel/postgres": "^0.8.2"
-  }
-}
