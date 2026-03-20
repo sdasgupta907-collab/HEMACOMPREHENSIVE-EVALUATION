@@ -131,6 +131,28 @@
             }
         }
 
+    
+        .btn-excel {
+            background: linear-gradient(135deg, #1D6F42, #2E8B57);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(29,111,66,0.3);
+        }
+        .btn-excel:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(29,111,66,0.4);
+            background: linear-gradient(135deg, #155a34, #1D6F42);
+        }
+
     </style>
 </head>
 <body>
@@ -1892,6 +1914,14 @@
                         <path d="M8 6V4C8 3.46957 8.21071 2.96086 8.58579 2.58579C8.96086 2.21071 9.46957 2 10 2H14C14.5304 2 15.0391 2.21071 15.4142 2.58579C15.7893 2.96086 16 3.46957 16 4V6M19 6V20C19 20.5304 18.7893 21.0391 18.4142 21.4142C18.0391 21.7893 17.5304 22 17 22H7C6.46957 22 5.96086 21.7893 5.58579 21.4142C5.21071 21.0391 5 20.5304 5 20V6H19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                     Clear Form
+                </button>
+                <button class="btn btn-excel" onclick="exportToExcel()">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M14 2V8H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M8 13H16M8 17H16M10 9H14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Export to Excel
                 </button>
             </div>
         </div>
@@ -6132,6 +6162,235 @@
         };
     }
     
+    
+    // ===================== EXPORT TO EXCEL =====================
+    function exportToExcel() {
+        // Collect all localStorage keys that are holistic report entries
+        const allKeys = Object.keys(localStorage);
+        const reportKeys = allKeys.filter(k => k.startsWith('holisticReport'));
+
+        if (reportKeys.length === 0) {
+            alert('No saved student data found in localStorage!');
+            return;
+        }
+
+        // Define all column headers
+        const headers = [
+            // Student Info
+            'Admission No', 'Student Name', 'Class', 'Section', 'Roll No',
+            'Father Name', 'Mother Name', 'DOB', 'Gender',
+            // Health
+            'Height (cm)', 'Weight (kg)', 'Blood Group', 'Vision Left', 'Vision Right',
+            'Medical Remarks',
+            // English
+            'ENG Read Pronunciation E1','ENG Read Pronunciation E2','ENG Read Pronunciation E3','ENG Read Pronunciation E4',
+            'ENG Read Fluency E1','ENG Read Fluency E2','ENG Read Fluency E3','ENG Read Fluency E4',
+            'ENG Read Comprehension E1','ENG Read Comprehension E2','ENG Read Comprehension E3','ENG Read Comprehension E4',
+            'ENG Write Creative E1','ENG Write Creative E2','ENG Write Creative E3','ENG Write Creative E4',
+            'ENG Write Handwriting E1','ENG Write Handwriting E2','ENG Write Handwriting E3','ENG Write Handwriting E4',
+            'ENG Write Grammar E1','ENG Write Grammar E2','ENG Write Grammar E3','ENG Write Grammar E4',
+            'ENG Write Spellings E1','ENG Write Spellings E2','ENG Write Spellings E3','ENG Write Spellings E4',
+            'ENG Write Vocabulary E1','ENG Write Vocabulary E2','ENG Write Vocabulary E3','ENG Write Vocabulary E4',
+            'ENG Speak Conversation E1','ENG Speak Conversation E2','ENG Speak Conversation E3','ENG Speak Conversation E4',
+            'ENG Speak Recitation E1','ENG Speak Recitation E2','ENG Speak Recitation E3','ENG Speak Recitation E4',
+            'ENG Listen Comprehension E1','ENG Listen Comprehension E2','ENG Listen Comprehension E3','ENG Listen Comprehension E4',
+            // Hindi
+            'HIN Read Pronunciation E1','HIN Read Pronunciation E2','HIN Read Pronunciation E3','HIN Read Pronunciation E4',
+            'HIN Read Fluency E1','HIN Read Fluency E2','HIN Read Fluency E3','HIN Read Fluency E4',
+            'HIN Read Comprehension E1','HIN Read Comprehension E2','HIN Read Comprehension E3','HIN Read Comprehension E4',
+            'HIN Write Creative E1','HIN Write Creative E2','HIN Write Creative E3','HIN Write Creative E4',
+            'HIN Write Handwriting E1','HIN Write Handwriting E2','HIN Write Handwriting E3','HIN Write Handwriting E4',
+            'HIN Write Grammar E1','HIN Write Grammar E2','HIN Write Grammar E3','HIN Write Grammar E4',
+            'HIN Write Spellings E1','HIN Write Spellings E2','HIN Write Spellings E3','HIN Write Spellings E4',
+            'HIN Write Vocabulary E1','HIN Write Vocabulary E2','HIN Write Vocabulary E3','HIN Write Vocabulary E4',
+            'HIN Speak Conversation E1','HIN Speak Conversation E2','HIN Speak Conversation E3','HIN Speak Conversation E4',
+            'HIN Speak Recitation E1','HIN Speak Recitation E2','HIN Speak Recitation E3','HIN Speak Recitation E4',
+            'HIN Listen Comprehension E1','HIN Listen Comprehension E2','HIN Listen Comprehension E3','HIN Listen Comprehension E4',
+            // Mathematics
+            'MATH Concept E1','MATH Concept E2','MATH Concept E3','MATH Concept E4',
+            'MATH Activity E1','MATH Activity E2','MATH Activity E3','MATH Activity E4',
+            'MATH Tables E1','MATH Tables E2','MATH Tables E3','MATH Tables E4',
+            'MATH Mental Ability E1','MATH Mental Ability E2','MATH Mental Ability E3','MATH Mental Ability E4',
+            // EVS
+            'EVS Env Sensitivity E1','EVS Env Sensitivity E2','EVS Env Sensitivity E3','EVS Env Sensitivity E4',
+            'EVS Activity Project E1','EVS Activity Project E2','EVS Activity Project E3','EVS Activity Project E4',
+            'EVS Group Discussion E1','EVS Group Discussion E2','EVS Group Discussion E3','EVS Group Discussion E4',
+            // Computer
+            'COMP Skills E1','COMP Skills E2',
+            'COMP Aptitude E1','COMP Aptitude E2',
+            // GK
+            'GK Exam E1','GK Exam E2',
+            // Pen Paper Exams
+            'PP English E1','PP English E2','PP English E3','PP English E4',
+            'PP Hindi E1','PP Hindi E2','PP Hindi E3','PP Hindi E4',
+            'PP Mathematics E1','PP Mathematics E2','PP Mathematics E3','PP Mathematics E4',
+            'PP EVS E1','PP EVS E2','PP EVS E3','PP EVS E4',
+            // Games
+            'GAMES Enthusiasm E1','GAMES Enthusiasm E2',
+            'GAMES Discipline E1','GAMES Discipline E2',
+            'GAMES Team Spirit E1','GAMES Team Spirit E2',
+            'GAMES Talent E1','GAMES Talent E2',
+            // Art Craft
+            'ART Interest E1','ART Interest E2',
+            'ART Creativity E1','ART Creativity E2',
+            'ART Skill E1','ART Skill E2',
+            // Music Dance
+            'MUSIC Interest E1','MUSIC Interest E2',
+            'MUSIC Rhythm E1','MUSIC Rhythm E2',
+            'MUSIC Melody E1','MUSIC Melody E2',
+            // Personality
+            'PERS Courteousness E1','PERS Courteousness E2',
+            'PERS Confidence E1','PERS Confidence E2',
+            'PERS Care of Belongings E1','PERS Care of Belongings E2',
+            'PERS Neatness E1','PERS Neatness E2',
+            'PERS Regularity Punctuality E1','PERS Regularity Punctuality E2',
+            'PERS Initiative E1','PERS Initiative E2',
+            'PERS Spirit of Service E1','PERS Spirit of Service E2',
+            'PERS Respect Others Property E1','PERS Respect Others Property E2',
+            'PERS Self Control E1','PERS Self Control E2',
+            // Attendance per Eval
+            'Attendance E1','Working Days E1','Participation E1','Remarks E1',
+            'Attendance E2','Working Days E2','Participation E2','Remarks E2',
+            'Attendance E3','Working Days E3','Participation E3','Remarks E3',
+            'Attendance E4','Working Days E4','Participation E4','Remarks E4',
+            // Overall Attendance (from personality section)
+            'Overall Attendance E4','Overall Working Days E4','Specific Participation E4','General Remarks E4',
+            // Session & Last Modified
+            'Session','Last Modified'
+        ];
+
+        const rows = [headers];
+
+        reportKeys.forEach(key => {
+            try {
+                const d = JSON.parse(localStorage.getItem(key));
+                if (!d) return;
+
+                const g = (id) => d[id] !== undefined ? d[id] : '';
+                const m = (subj, aspect, ev) => {
+                    if (d.marks && d.marks[subj] && d.marks[subj][aspect])
+                        return d.marks[subj][aspect][ev] || '';
+                    return g(subj + '_' + aspect + '_eval' + ev);
+                };
+
+                const row = [
+                    // Student Info
+                    g('admissionNo'), g('studentName'), g('class'), g('section'), g('rollNo'),
+                    g('fatherName'), g('motherName'), g('dob'), g('gender'),
+                    // Health
+                    g('height'), g('weight'), g('bloodGroup'), g('visionLeft'), g('visionRight'),
+                    g('medicalRemarks'),
+                    // English
+                    m('english','pronunciation',1), m('english','pronunciation',2), m('english','pronunciation',3), m('english','pronunciation',4),
+                    m('english','fluency',1), m('english','fluency',2), m('english','fluency',3), m('english','fluency',4),
+                    m('english','comprehension',1), m('english','comprehension',2), m('english','comprehension',3), m('english','comprehension',4),
+                    m('english','creative-writing',1), m('english','creative-writing',2), m('english','creative-writing',3), m('english','creative-writing',4),
+                    m('english','handwriting',1), m('english','handwriting',2), m('english','handwriting',3), m('english','handwriting',4),
+                    m('english','grammar',1), m('english','grammar',2), m('english','grammar',3), m('english','grammar',4),
+                    m('english','spellings',1), m('english','spellings',2), m('english','spellings',3), m('english','spellings',4),
+                    m('english','vocabulary',1), m('english','vocabulary',2), m('english','vocabulary',3), m('english','vocabulary',4),
+                    m('english','conversation',1), m('english','conversation',2), m('english','conversation',3), m('english','conversation',4),
+                    m('english','recitation',1), m('english','recitation',2), m('english','recitation',3), m('english','recitation',4),
+                    m('english','listening-comprehension',1), m('english','listening-comprehension',2), m('english','listening-comprehension',3), m('english','listening-comprehension',4),
+                    // Hindi
+                    m('hindi','pronunciation',1), m('hindi','pronunciation',2), m('hindi','pronunciation',3), m('hindi','pronunciation',4),
+                    m('hindi','fluency',1), m('hindi','fluency',2), m('hindi','fluency',3), m('hindi','fluency',4),
+                    m('hindi','comprehension',1), m('hindi','comprehension',2), m('hindi','comprehension',3), m('hindi','comprehension',4),
+                    m('hindi','creative-writing',1), m('hindi','creative-writing',2), m('hindi','creative-writing',3), m('hindi','creative-writing',4),
+                    m('hindi','handwriting',1), m('hindi','handwriting',2), m('hindi','handwriting',3), m('hindi','handwriting',4),
+                    m('hindi','grammar',1), m('hindi','grammar',2), m('hindi','grammar',3), m('hindi','grammar',4),
+                    m('hindi','spellings',1), m('hindi','spellings',2), m('hindi','spellings',3), m('hindi','spellings',4),
+                    m('hindi','vocabulary',1), m('hindi','vocabulary',2), m('hindi','vocabulary',3), m('hindi','vocabulary',4),
+                    m('hindi','conversation',1), m('hindi','conversation',2), m('hindi','conversation',3), m('hindi','conversation',4),
+                    m('hindi','recitation',1), m('hindi','recitation',2), m('hindi','recitation',3), m('hindi','recitation',4),
+                    m('hindi','listening-comprehension',1), m('hindi','listening-comprehension',2), m('hindi','listening-comprehension',3), m('hindi','listening-comprehension',4),
+                    // Mathematics
+                    m('mathematics','concept',1), m('mathematics','concept',2), m('mathematics','concept',3), m('mathematics','concept',4),
+                    m('mathematics','activity',1), m('mathematics','activity',2), m('mathematics','activity',3), m('mathematics','activity',4),
+                    m('mathematics','tables',1), m('mathematics','tables',2), m('mathematics','tables',3), m('mathematics','tables',4),
+                    m('mathematics','mental-ability',1), m('mathematics','mental-ability',2), m('mathematics','mental-ability',3), m('mathematics','mental-ability',4),
+                    // EVS
+                    m('evs','environmental-sensitivity',1), m('evs','environmental-sensitivity',2), m('evs','environmental-sensitivity',3), m('evs','environmental-sensitivity',4),
+                    m('evs','activity-project',1), m('evs','activity-project',2), m('evs','activity-project',3), m('evs','activity-project',4),
+                    m('evs','group-discussion',1), m('evs','group-discussion',2), m('evs','group-discussion',3), m('evs','group-discussion',4),
+                    // Computer
+                    m('computer','skills',1), m('computer','skills',2),
+                    m('computer','aptitude',1), m('computer','aptitude',2),
+                    // GK
+                    m('gk','exam',1), m('gk','exam',2),
+                    // Pen Paper Exams
+                    m('exam','english',1), m('exam','english',2), m('exam','english',3), m('exam','english',4),
+                    m('exam','hindi',1), m('exam','hindi',2), m('exam','hindi',3), m('exam','hindi',4),
+                    m('exam','mathematics',1), m('exam','mathematics',2), m('exam','mathematics',3), m('exam','mathematics',4),
+                    m('exam','evs',1), m('exam','evs',2), m('exam','evs',3), m('exam','evs',4),
+                    // Games
+                    m('games','enthusiasm',1), m('games','enthusiasm',2),
+                    m('games','discipline',1), m('games','discipline',2),
+                    m('games','team-spirit',1), m('games','team-spirit',2),
+                    m('games','talent',1), m('games','talent',2),
+                    // Art
+                    m('art','interest',1), m('art','interest',2),
+                    m('art','creativity',1), m('art','creativity',2),
+                    m('art','skill',1), m('art','skill',2),
+                    // Music
+                    m('music','interest',1), m('music','interest',2),
+                    m('music','rhythm',1), m('music','rhythm',2),
+                    m('music','melody',1), m('music','melody',2),
+                    // Personality
+                    m('personality','courteousness',1), m('personality','courteousness',2),
+                    m('personality','confidence',1), m('personality','confidence',2),
+                    m('personality','care-of-belongings',1), m('personality','care-of-belongings',2),
+                    m('personality','neatness',1), m('personality','neatness',2),
+                    m('personality','regularity-punctuality',1), m('personality','regularity-punctuality',2),
+                    m('personality','initiative',1), m('personality','initiative',2),
+                    m('personality','spirit-of-service',1), m('personality','spirit-of-service',2),
+                    m('personality','respect-for-others-property',1), m('personality','respect-for-others-property',2),
+                    m('personality','self-control',1), m('personality','self-control',2),
+                    // Attendance detailed
+                    g('attendance1term2'), g('workingDays1term2'), g('participation1term2'), g('remarks1term2'),
+                    g('attendance2term2'), g('workingDays2term2'), g('participation2term2'), g('remarks2term2'),
+                    g('attendance3term2'), g('workingDays3term2'), g('participation3term2'), g('remarks3term2'),
+                    g('attendance4term2'), g('workingDays4term2'), g('participation4term2'), g('remarks4term2'),
+                    // Overall Attendance Eval4
+                    g('attendance4'), g('workingDays4'), g('participation4'), g('remarks4'),
+                    // Session & Modified
+                    d.session || '2025-2026', d.lastModified || ''
+                ];
+
+                rows.push(row);
+            } catch(e) {
+                console.error('Error parsing key:', key, e);
+            }
+        });
+
+        if (rows.length <= 1) {
+            alert('No valid student records found to export!');
+            return;
+        }
+
+        // Build CSV content with BOM for Excel UTF-8 compatibility
+        const bom = '\uFEFF';
+        const csvContent = bom + rows.map(r =>
+            r.map(cell => {
+                const val = String(cell).replace(/"/g, '""');
+                return '"' + val + '"';
+            }).join(',')
+        ).join('\n');
+
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'HEMA_Students_Report_2025-26.csv';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+
+        alert('✅ Excel (CSV) exported successfully!\n' + (rows.length - 1) + ' student record(s) exported.');
+    }
+    // ===================== END EXPORT TO EXCEL =====================
+
     </script>
 </body>
 </html>
